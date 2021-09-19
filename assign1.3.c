@@ -3,10 +3,10 @@ void Display()
 {
     int i=0;
 
-   for(i=5;i1;i++)
+   for(i=5;i>=1;i)
    {
-       printf("%d",i);
-       i++;
+       printf("%d\t",i);
+       i--;
    }
 }
 

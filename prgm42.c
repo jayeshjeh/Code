@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+// Accept Number from user and display its table 
 void DisplayTable(int);
 int main()
 {

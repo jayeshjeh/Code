@@ -4,9 +4,7 @@
 
 void Display(int iRow, int iCol)
 {
-    iRow=0, iCol=0;
-
-    int i=0, j=0;
+        int i=0, j=0;
 
     for(i=1;i<=iRow;i++)
     {
@@ -16,7 +14,7 @@ void Display(int iRow, int iCol)
             printf("*\t");
         }
 
-        
+
         printf("\n");
     }   
 }

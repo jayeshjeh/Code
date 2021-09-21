@@ -19,7 +19,7 @@ void Display(int iNo)
 
     char ch = '\0';
 
-    for(iCnt =1, ch ='a'; iCnt<=iNo;iCnt++,ch++)
+    for(iCnt =1, ch ='a'; iCnt<=iNo;iCnt++,ch++)  // For capital alphabet mention 'A' instead of 'a'
     {
         printf("%c\t",ch);
     }

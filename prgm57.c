@@ -1,4 +1,5 @@
 #include<stdio.h>
+//int Addition(int *Brr)
 
 int Addition(int Brr[])
 {
@@ -17,13 +18,12 @@ int main()
 
     printf("Enter numbers\n");
 
-
     for(iCnt=0; iCnt<5; iCnt++)
     {
         scanf("%d",&Arr[iCnt]);
     }
    
-    iRet = Addition(Arr);
+    iRet = Addition(Arr);       //Addition(100);
     printf("Addition is : %d\n",iRet);
 
     return 0;

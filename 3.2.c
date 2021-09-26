@@ -7,9 +7,10 @@ void DisplayFactor(int iNo)
     {
         iNo=-iNo;
     }
-    for(i=1;i<=iNo;i++)
+    for(i=1;i<=(iNo/2);i++)
     {
         if((iNo%i)==0)
+        if((i%2)==0)
         {
             printf("%d\n",i);
         }    

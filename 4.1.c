@@ -5,9 +5,8 @@ int MultFact(int iNo)
     int iCnt =0, iMult =1;
     for(iCnt=1;iCnt<=iNo;iCnt++)
     {
-        if((iNo%i)==0)
-        iMult = iMult * iCnt;
-
+        if((iNo%iCnt)==0)
+                
         
 
         
@@ -24,6 +23,6 @@ int main()
     scanf("%d",&iValue);
 
     iRet = MultFact(iValue);
-    printf("%d", iRet);
+    
     return 0;
 }

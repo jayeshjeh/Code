@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<stdlib.h>
+#include<stdlib.h>      // Min Number
 
 int Maximum (int Arr[], int iSize)
 {
@@ -7,7 +7,7 @@ int Maximum (int Arr[], int iSize)
     
     for(i=0;i<iSize;i++)
     {
-        if(Arr[i]>iMax)
+        if(Arr[i]<iMax)
         {
             iMax = Arr[i];
         }

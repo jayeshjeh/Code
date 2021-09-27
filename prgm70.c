@@ -10,11 +10,19 @@ bool CheckNumber(int Arr[],int iSize)
     {
         if(Arr[i]==11)
         {
-            bAns = true;
             break;
         }
     }
-    return bAns;
+    //Loop var Sampala///
+    if(i==iSize)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+    
 
 }
 

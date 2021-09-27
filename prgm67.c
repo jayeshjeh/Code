@@ -1,18 +1,18 @@
 #include<stdio.h>
 #include<stdlib.h>      // Min Number
 
-int Maximum (int Arr[], int iSize)
+int Minimum (int Arr[], int iSize)
 {
-    int i=0,iMax=Arr[0];
+    int i=0,iMin=Arr[0];
     
     for(i=0;i<iSize;i++)
     {
-        if(Arr[i]<iMax)
+        if(Arr[i]<iMin)
         {
-            iMax = Arr[i];
+            iMin = Arr[i];
         }
     }
-    return iMax;
+    return iMin;
     
 }
 int main()
@@ -30,8 +30,8 @@ int main()
     {
         scanf("%d",&ptr[i]);
     }
-    iRet = Maximum (ptr,iLength);
-    printf("Maximum  is :%d\n",iRet);
+    iRet = Minimum (ptr,iLength);
+    printf("Minimum  is :%d\n",iRet);
     free(ptr);
     return 0;
 }

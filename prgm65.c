@@ -7,7 +7,7 @@ int SumOdd (int Arr[], int iSize)
 
     for(i=0;i<iSize;i++)
     {
-        if(Arr[i]>10)
+        if((Arr[i]>10)&&(Arr[i]<20))
         {
             iCnt++;
         }

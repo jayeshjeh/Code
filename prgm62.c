@@ -32,4 +32,5 @@ int main()
     fRet = Average (ptr,iLength);
     printf("Average is :%f",fRet);
     free(ptr);
+    return 0;
 }

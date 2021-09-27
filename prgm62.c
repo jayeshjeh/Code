@@ -11,7 +11,7 @@ float Average(int Arr[], int iSize)
         iSum = iSum+Arr[i];
     }
 
-    fResult = iSum/iSize;
+    fResult = (float)iSum/(float)iSize; //Explicit typecasting
     return fResult;
 }
 int main()

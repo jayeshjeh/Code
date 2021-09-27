@@ -10,7 +10,7 @@ float Average(int Arr[], int iSize)
     {
         iSum = iSum+Arr[i];
     }
-
+                //18.0/4.0 
     fResult = (float)iSum/(float)iSize; //Explicit typecasting
     return fResult;
 }
@@ -30,7 +30,7 @@ int main()
         scanf("%d",&ptr[i]);
     }
     fRet = Average (ptr,iLength);
-    printf("Average is :%f",fRet);
+    printf("Average is :%.2f",fRet);
     free(ptr);
     return 0;
 }

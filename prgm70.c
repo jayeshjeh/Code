@@ -22,10 +22,7 @@ bool CheckNumber(int Arr[],int iSize)
     {
         return true;
     }
-    
-
 }
-
 int main()
 {
     int iLength=0,i=0;

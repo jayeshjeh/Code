@@ -1,11 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdbool.h>
 
-bool CheckNumber(int Arr[],int iSize,int iNo)
+int FirstOccurance(int Arr[],int iSize,int iNo)
 {
     int i=0;
-    bool bAns = false;
     for(i=0;i<iSize;i++)
     {
         if(Arr[i]==iNo)
@@ -16,22 +14,17 @@ bool CheckNumber(int Arr[],int iSize,int iNo)
     //Loop var Sampala///
     if(i==iSize)
     {
-        return false;
+        return -1;
     }
     else
     {
-        return true;
+        return i;
     }
-    
-
 }
-
 int main()
 {
-    int iLength=0,i=0, iValue =0;
+    int iLength=0,i=0, iValue =0,iRet=0;
     int *ptr=NULL;
-    bool bRet=false;
-
     printf("Enter number of elements\n");
     scanf("%d",&iLength);
 
@@ -41,16 +34,16 @@ int main()
     {
         scanf("%d",&ptr[i]);
     }
-    printf("Enter elements\n");
+    printf("Enter element to search\n");
     scanf("%d",&iValue);
-    bRet = CheckNumber(ptr,iLength,iValue);
-    if(bRet== true)
+    iRet = FirstOccurance(ptr,iLength,iValue);
+    if(iRet== -1)
     {
-        printf("Number is there\n");
+        printf("There is no such number\n");
     }
     else
     {
-        printf("Number is not there\n");
+        printf("Number is there at index %d\n",iRet);
     }
     free(ptr);
     return 0;

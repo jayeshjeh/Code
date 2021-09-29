@@ -9,7 +9,9 @@ prgm80.c - String - Using while loop in Above program
 prgm81.c - String - Same as above with moditfication
 prgm82.c - String - Print length of String
 prgm83.c - String - used UNIT in above program -    Check prgm for more info
-prgm84.c - String - alphabets intro
+prgm84.c - String - alphabets intro (ASCII values)
+prgm85.c - String - Display ASCII Table
+prgm86.c - String - ASCII Table with Hexa and octal 
 
 
 

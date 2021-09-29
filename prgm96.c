@@ -13,7 +13,6 @@ int Count(char *str)
         {
             SCount++;
         }
-
         str++;
     }
     printf("Small letters are : %d\n",SCount);

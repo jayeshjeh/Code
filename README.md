@@ -22,7 +22,8 @@ prgm93.c - String - CHANGE the Case of Alphabet
 prgm94.c - String - Count of Small Characters 
 prgm95.c - String - Count of Capital Characters
 prgm96.c - String - Count of Small & Capital Characters
-prgm97.c - String - 
+prgm97.c - String - Count of WHITE SPACE
+prgm98.c - String - 
 
 
 

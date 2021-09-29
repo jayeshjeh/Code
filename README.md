@@ -7,6 +7,8 @@ prgm78.c - String - Same as 77, just used *(pointer)
 prgm79.c - String - Pointer used in above Program
 prgm80.c - String - Using while loop in Above program
 prgm81.c - String - Same as above with moditfication
-prgm82.c - String - 
+prgm82.c - String - Print length of String
+prgm83.c - String - 
+
 
 

@@ -14,6 +14,14 @@ prgm85.c - String - Display ASCII Table
 prgm86.c - String - ASCII Table with Hexa and octal 
 prgm87.c - String - Check wheather alphabet is capital or not
 prgm88.c - String - Check wheather alphabet is capital or not using ASCII Value
+prgm89.c - String - Check wheather alphabet is small or not
+prgm90.c - String - Checking it is Digit or not 
+prgm91.c - String - Convert alphabet from Small to Capital3
+prgm92.c - String - Convert alphabet from Capital to Small
+prgm93.c - String - 
+
+
+
 
 
 

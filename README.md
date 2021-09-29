@@ -12,6 +12,8 @@ prgm83.c - String - used UNIT in above program -    Check prgm for more info
 prgm84.c - String - alphabets intro (ASCII values)
 prgm85.c - String - Display ASCII Table
 prgm86.c - String - ASCII Table with Hexa and octal 
+prgm87.c - String - Check wheather alphabet is capital or not
+prgm88.c - String - Check wheather alphabet is capital or not using ASCII Value
 
 
 

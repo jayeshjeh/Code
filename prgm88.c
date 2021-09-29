@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<stdbool.h>
+bool CheckCapital(char c)
+{
+    if((c>=65)&&(c<=90))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int main()
+{
+    char ch = '\0';
+    int bRet = false;
+
+    printf("Enter character\n");
+    scanf("%c",&ch);
+
+    bRet = CheckCapital(ch);
+
+    if(bRet == true)
+    {
+        printf("It is capital\n");
+    }
+    else
+    {
+        printf("It is not capital\n");
+    }
+    return 0;
+}

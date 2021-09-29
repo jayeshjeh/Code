@@ -19,6 +19,11 @@ prgm90.c - String - Checking it is Digit or not
 prgm91.c - String - Convert alphabet from Small to Capital3
 prgm92.c - String - Convert alphabet from Capital to Small
 prgm93.c - String - CHANGE the Case of Alphabet
+prgm94.c - String - Count of Small Characters 
+prgm95.c - String - Count of Capital Characters
+prgm96.c - String - Count of Small & Capital Characters
+prgm97.c - String - 
+
 
 
 

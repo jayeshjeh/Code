@@ -9,7 +9,7 @@ prgm80.c - String - Using while loop in Above program
 prgm81.c - String - Same as above with moditfication
 prgm82.c - String - Print length of String
 prgm83.c - String - used UNIT in above program -    Check prgm for more info
-prgm84.c - String - 
+prgm84.c - String - alphabets intro
 
 
 

@@ -1,11 +1,11 @@
 # Project
-prgm01.c
-prgm02.c
-prgm03.c
-prgm04.c
-prgm05.c
-prgm06.c
-prgm07.c
+prgm01.c - Addition of two numbers - Ideal Way
+prgm02.c - Addition of two numbers - Modified 
+prgm03.c - Addition of two numbers - Shortcut Way
+prgm04.c - Accept no and Print "*"
+prgm05.c - Display 1 to 5 numbers - Simple Way
+prgm06.c - Display 1 to 5 numbers - Ideal
+prgm07.c - 
 prgm08.c
 prgm09.c
 prgm10.c

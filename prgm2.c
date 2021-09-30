@@ -1,8 +1,15 @@
-// Program to print 5 times "Marvellous" on screen 
-
 #include<stdio.h>
 
-void Display()
+int main()
 {
-	int i=0;
-	for(i=1; i<=
+    int x, y, z;
+    
+    printf("Enter first number\n");
+    scanf("%d",&x);
+    printf("Enter second number\n");
+    scanf("%d",&y);
+
+    z = x+y;
+    printf("Addition is : %d\n",z);
+    return 0;
+}

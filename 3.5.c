@@ -6,7 +6,7 @@ typedef int BOOL;
 
 int ChkVowel(char c)
 {
-    if(c=='a'||'e'||'i'||'o'||'u')
+    if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u')
     {
         return TRUE;
     }

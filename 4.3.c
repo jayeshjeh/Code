@@ -1,14 +1,10 @@
 #include<stdio.h>
-void FactRev(int iNo)
+void NonFact(int iNo)
 {
-    int i =0,iSum=0;
-    if(iNo<=0)
-    {
-        iNo = -iNo;
-    }
+    int i=0;
     for(i=1;i<=iNo;i++)
     {
-        if(((iNo%i)==0)&&((i%2)==0))
+        if (iNo %i !=0)
         {
             printf("%d ",i);
         }
@@ -17,12 +13,12 @@ void FactRev(int iNo)
 
 int main()
 {
-    int iValue = 0;
+    int iValue=0;
 
     printf("Enter number\n");
     scanf("%d",&iValue);
 
-    FactRev(iValue);
+    NonFact(iValue);
 
     return 0;
 }

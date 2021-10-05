@@ -3,17 +3,17 @@ int FactDiff(int iNo)
 {
     int i=0,iFact =0,iNon=0;
     int iDif=0;
-    for(i=1;i<=iNo;i++)
+    for(i=1;i<iNo;i++)
     {    if(iNo%i==0)
         {
-            iFact = i;
+            iFact=iFact+i;
         }
-        else if (iNo%i !=0)
+        else 
         {
-            iNon=i;
+            iNon = iNon+i;
         }
+        iDif = iFact-iNon;
     }
-    iDif = iNon-iFact;
     return iDif;
 }
 int main()

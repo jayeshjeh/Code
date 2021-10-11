@@ -189,7 +189,11 @@ prgm96.c - String - Count of Small & Capital Characters
 
 prgm97.c - String - Count of WHITE SPACE
 
-prgm98.c - String - 
+prgm98.c - String - Check vowels : small alpha
+
+prgm99.c - String - Check vowels : All case
+
+prgm100.c - String - Count Frequency 
 
 
 

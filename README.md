@@ -201,9 +201,9 @@ prgm102.c - String - String Pallindrome- using flag
 
 prgm103.c - String - String Pallindrome - using 1 less varible 
 
-prgm104.c - String - String REVERSE
+prgm104.c - String - String SWAP
 
-prgm105.c - String - 
+prgm105.c - String - String REVERSE
 
 
 

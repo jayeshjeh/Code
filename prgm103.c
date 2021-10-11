@@ -5,23 +5,21 @@ bool CheckPallindrome(char *str)
 {
     char *start = NULL;
     char *end = NULL;
-    start = str;
+    bool flag = true;
     end = str;
     while(*end!='\0')
     { end++; }
     end--;
 
-    while(start < end)
+    while(str < end)
     {
-        if(*start!= *end)
-        { break; }
-        start++;
+        if(*str!= *end)
+        { flag = false;
+        break; }
+        str++;
         end--;
     }
-    if(start < end)
-    { return false; }
-    else
-    { return true; }
+    return flag;
 }
 int main()
 {

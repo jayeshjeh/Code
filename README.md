@@ -195,7 +195,15 @@ prgm99.c - String - Check vowels : All case
 
 prgm100.c - String - Count Frequency 
 
-prgm101.c - String - 
+PRGM101.c - String - String Pallindrome // IMPORTANT
+
+prgm102.c - String - String Pallindrome- using flag
+
+prgm103.c - String - String Pallindrome - using 1 less varible 
+
+prgm104.c - String - String REVERSE
+
+prgm105.c - String - 
 
 
 

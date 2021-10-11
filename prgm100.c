@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-int CountFrequency(char *str,char ch)
+int CountFrequency(char *str,char ch)      // *str = data & str = address
 {
     int iCnt=0;
     if(str==NULL)

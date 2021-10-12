@@ -205,7 +205,11 @@ prgm104.c - String - String SWAP
 
 prgm105.c - String - String REVERSE
 
-prgm106.c - 
+prgm106.c - Bit - Decimal to Binary
+
+prgm107.c - Bit - Display Binary, Octal, Hexadecimal
+
+prgm108.c - Bit - Bit is ON or OFF
 
 
 

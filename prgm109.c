@@ -4,7 +4,7 @@ typedef unsigned int UNIT;
 
 bool CheckBit(UNIT iNo)
 {
-    UNIT iMask = 0x00000008;
+    UNIT iMask = 0x00100000;
     UNIT iResult=0;
 
     iResult = iNo & iMask;

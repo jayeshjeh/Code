@@ -213,6 +213,14 @@ prgm108.c - Bit -  4th Bit is ON or OFF
 
 prgm109.c - Bit - 21th Bit is ON or OFF
 
+prgm110.c - Bit - 7th & 12th Bit is ON or OFF
+
+prgm111.c - Bit - 1st BYTE(1st 4 bit) is ON or OFF
+
+prgm112.c - Bit - Accept number and position of bit(dynamic code for bit is ON or OFF)
+
+prgm113.c - Bit - 
+
 
 
 

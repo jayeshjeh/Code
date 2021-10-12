@@ -17,9 +17,7 @@ bool CheckBit(UNIT iNo)
     {
         return false;
     }
-
 }
-
 int main()
 {
     UNIT iValue=0;

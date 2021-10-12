@@ -4,7 +4,7 @@ typedef unsigned int UNIT;
 
 bool CheckBit(UNIT iNo)
 {
-    UNIT iMask = 0x00100000;
+    UNIT iMask = 0x00000840;
     UNIT iResult=0;
 
     iResult = iNo & iMask;
@@ -30,11 +30,11 @@ int main()
 
     if(bRet==true)
     {
-        printf("21th bit is ON\n");
+        printf("7th & 12th bit is ON\n");
     }
     else
     {
-        printf("21th bit is OFF\n");
+        printf("7th & 12th bit is OFF\n");
     }
     return 0;
 }

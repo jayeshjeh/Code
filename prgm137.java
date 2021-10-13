@@ -5,3 +5,10 @@ class Program137
         Sysytem.out.println("Jay Ganesh..");
     }
 }
+
+
+//For Compilation
+// javac Program137.java
+// java Program137
+//OR
+// java Program137.java

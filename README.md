@@ -221,7 +221,13 @@ prgm112.c - Bit - Accept number and position of bit(dynamic code for bit is ON o
 
 ~~~~~~~~~~~~~~~~~~~~~~~ JAVA ~~~~~~~~~~~~~~~~~~~~~
 
-prgm137.c - 
+prgm137.java - Jai Ganesh ( Hello World )
+
+prgm138.java - Addition of 2nos. ( All in main fucntion)
+
+prgm139.java - Addition of 2nos. (Using different Function)
+
+prgm140.java - 
 
 
 

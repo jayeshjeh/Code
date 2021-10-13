@@ -1,14 +1,16 @@
 import java.util.*;
 
-class Program139
+class Marvellous
 {
-    public static int Addition(int i, int j)
+    public int Addition(int i, int j)
     {
         int iResult=0;
         iResult=i+j;
         return iResult;
     }
-
+}
+class Program140
+{
     public static void main(String str[])
     {
         Scanner sobj = new Scanner(System.in);

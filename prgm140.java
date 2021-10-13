@@ -21,8 +21,9 @@ class Program140
 
         System.out.println("Enter Second Number");
         iNo2 = sobj.nextInt();
+        Marvellous mobj = new Marvellous();
 
-        iAns = Addition(iNo1,iNo2);
+        iAns = mobj.Addition(iNo1,iNo2);
 
         System.out.println("Addition is : "+iAns);
     }

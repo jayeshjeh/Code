@@ -1,10 +1,11 @@
 import java.util.*;
+
 class Marvellous
 {
 	public boolean CheckArmstrong(int iNo)
 	{
-		int iTemp, iDigCnt = 0, iDigit, iPower = 1;
-		int iCnt, iSum = 0;
+		int iTemp = 0, iDigCnt = 0, iDigit = 0, iPower = 1;
+		int iCnt = 0, iSum = 0;
 		if(iNo < 0)
 		{
 			iNo = -iNo;
@@ -42,11 +43,11 @@ class Marvellous
 }
 class Program142
 {
-	public static void main(String[] arg)
+	public static void main(String arg[]) 
 	{
-		Scanner sobj = new Scanner(System.in);
-		int iValue;
-		boolean bRet;
+		Scanner in = new Scanner(System.in);
+		int iValue = 0;
+		boolean bRet = false;
 
 		System.out.println("Enter number");
 		iValue = sobj.nextInt();
@@ -57,7 +58,7 @@ class Program142
 		if(bRet == true)
 		{	System.out.println("It is Armstrong number");	}
 		else
-		{	System.out.println("It is not Armstrong number");	}
+		{System.out.println("It is not Armstrong number");}
 	}
 }
 

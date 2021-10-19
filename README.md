@@ -397,7 +397,7 @@ prgm141.java -
 
 prgm142.java - Check number is Armstrong or not
 
-prgm143.java - String Intro
+prgm143.java - Array Intro
 
 prgm144.java - Additions of elements
 
@@ -407,7 +407,9 @@ prgm146.java - Addition of elements with importing pacakage
 
 prgm147.java - Average of elements with pacakage
 
-prgm148.java - String - 
+prgm148.java - String - Intro
+
+prgm149.java - 
 
 
 

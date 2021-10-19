@@ -6,7 +6,7 @@ class Program148
     {
         Scanner sobj = new Scanner(System.in);
         String str;
-        System.out.println("Enter you name");
+        System.out.println("Enter your name");
         str = sobj.nextLine();
 
         System.out.println("Hello : "+str);

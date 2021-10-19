@@ -409,7 +409,15 @@ prgm147.java - Average of elements with pacakage
 
 prgm148.java - String - Intro
 
-prgm149.java - 
+prgm149.java - Welcome : name String 
+
+prgm150.java - String is : - created charactertics
+
+prgm151.java - Check vowels using for loop 
+
+prgm152.java - Check vowels using while loop 
+
+prgm153.java - Reverse String 
 
 
 

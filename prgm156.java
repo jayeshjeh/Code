@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Program153
+class Program156
 {
     public static void main(String arg[])
     {
@@ -29,7 +29,7 @@ class StringX
 }
 class Marvellous extends StringX
 {
-    public String ReverseX()
+    public boolean CheckPallindrome()
     {
         char Arr[] = str.toCharArray();
         int iStart =0, iEnd = Arr.length-1;

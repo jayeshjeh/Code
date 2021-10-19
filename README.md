@@ -401,9 +401,11 @@ prgm143.java - String Intro
 
 prgm144.java - Additions of elements
 
-prgm145.java - 
+prgm145.java - Addition with 3 functions
 
-prgm146.java - 
+prgm146.java - Addition of elements with importing pacakage
+
+prgm147.java - Average of elements with pacakage
 
 
 

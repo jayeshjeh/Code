@@ -1,6 +1,7 @@
 import java.util.*;
+import MarvellousNumbers.ArrayX;
 
-class Program145
+class Program146
 {
     public static void main(String arg[])
     {
@@ -15,37 +16,6 @@ class Program145
         mobj.Display();
         iRet= mobj.Add();
         System.out.println("Addition is "+iRet);
-    }
-}
-
-class ArrayX
-{
-    public int Arr[];
-
-    public ArrayX(int iSize)
-    {
-        Arr = new int[iSize];
-    }
-
-    public void Accept()
-    {
-        Scanner sobj = new Scanner(System.in);  //Input
-        int iCnt =0;
-        System.out.println("Enter elements");   // To Display
-        for(iCnt=0;iCnt<Arr.length;iCnt++)
-        {
-            Arr[iCnt] = sobj.nextInt();
-        }
-    }
-
-    public void Display()
-    {
-        int iCnt=0;
-        System.out.println("Elements are : ");
-        for(iCnt =0;iCnt<Arr.length;iCnt++)
-        {
-            System.out.println(Arr[iCnt]);
-        }
     }
 }
 

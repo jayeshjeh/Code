@@ -30,7 +30,18 @@ class Marvellous extends StringX
 {
     public String ReverseX()
     {
-       char Arr[] = str.to
+       char Arr[] = str.toCharArray();
+       int iStart=0,iEnd= Arr.length-1;
+       char temp;
+       while(iStart<iEnd)
+       {
+           temp = Arr[iStart];
+           Arr[iStart]=Arr[iEnd];
+           Arr[iEnd]= temp;
+           iStart++;
+           iEnd--;
+       }
+       return String.valueOf(Arr);
 
     }
 }

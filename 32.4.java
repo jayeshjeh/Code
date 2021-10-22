@@ -13,8 +13,8 @@ class Program145
         Marvellous mobj = new Marvellous(iLength);
         mobj.Accept();
         mobj.Display();
-        iRet= mobj.Difference();
-        System.out.println("Difference is "+iRet);
+
+
     }
 }
 
@@ -55,22 +55,18 @@ class Marvellous extends ArrayX
     {
         super(iValue);
     }
-    public int Difference()
+    public void Display()
     {
-
-        int iSum =0,iCnt=0,iEvn=0,iOdd=0,iDif=0;
+        int iSum =0,iCnt=0;
         for(iCnt =0;iCnt<Arr.length;iCnt++)
         {
-            if ((Arr[iCnt] % 2) == 0) {
-                iEvn = iEvn + Arr[iCnt];
-            } else {
-                iOdd = iOdd + Arr[iCnt];
+            if (((Arr[iCnt] % 5 ) == 0)&&(Arr[iCnt]%3)==0)
+            {
+                System.out.println("Number are "+Arr[iCnt]);
             }
-            iDif = iEvn - iOdd;
         }
-        return iDif;
-    }
 
+    }
 }
 
 

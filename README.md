@@ -319,7 +319,7 @@ prgm79.c - String - Pointer used in above Program
 
 prgm80.c - String - Using while loop in Above program
 
-prgm81.c - String - Same as above with moditfication
+prgm81.c - String - Same as above with modification
 
 prgm82.c - String - Print length of String
 
@@ -359,11 +359,11 @@ prgm99.c - String - Check vowels : All case
 
 prgm100.c - String - Count Frequency 
 
-PRGM101.c - String - String Pallindrome // IMPORTANT
+prgm101.c - String - String Pallindrome // IMPORTANT
 
 prgm102.c - String - String Pallindrome- using flag
 
-prgm103.c - String - String Pallindrome - using 1 less varible 
+prgm103.c - String - String Pallindrome - using 1 less variable 
 
 prgm104.c - String - String SWAP
 
@@ -420,6 +420,34 @@ prgm152.java - Check vowels using while loop
 prgm153.java - Reverse String 
 
 prgm154.java - 
+
+prgm155.java - 
+
+prgm156.java - 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~FILE HANDLING ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+prgm157.c - File create my static name (hardcoded)
+
+prgm158.c - File create by any name
+
+prgm159.c - File Open and read it.
+
+prgm160.c - File Open and read.
+
+prgm161.c - File Open and read specific data only.(defined by us)
+
+prgm162.c - Display Data from file
+
+prgm163.c - Display of data using "write".
+
+prgm164.c - Display of data using "write" and closing of specific file.
+
+prgm165.c - 
+
+prgm166.c - 
+
+prgm167.c - 
 
 
 

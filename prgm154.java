@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Program153
+class Program154
 {
     public static void main(String arg[])
     {
@@ -11,7 +11,6 @@ class Program153
         System.out.println("Reverse string is : "+s);
     }
 }
-
 class StringX
 {
     public String str;
@@ -42,7 +41,6 @@ class Marvellous extends StringX
             iStart++;
             iEnd--;
         }
-        return new StringX(Arr);
+        return String.valueOf(Arr);
     }
-
 }

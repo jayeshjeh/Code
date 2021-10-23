@@ -11,7 +11,6 @@ class Program153
         System.out.println("Reverse string is : "+s);
     }
 }
-
 class StringX
 {
     public String str;
@@ -44,5 +43,4 @@ class Marvellous extends StringX
         }
         return new StringX(Arr);
     }
-
 }

@@ -7,8 +7,16 @@ class Program156
         Marvellous mobj = new Marvellous();
         mobj.Accept();
         mobj.Display();
-        String s = mobj.ReverseX();
-        System.out.println("Reverse string is : "+s);
+        boolean bRet;
+        bRet= mobj.CheckPallindrome();
+        if(bRet==true)
+        {
+            System.out.println("String is Pallindrome");
+        }
+        else
+        {
+            System.out.println("String is not Pallindrome");
+        }
     }
 }
 
@@ -42,7 +50,10 @@ class Marvellous extends StringX
             iStart++;
             iEnd--;
         }
-        return new StringX(Arr);
+        String newstr = new String(Arr);
+        boolean bRet = newstr.equals(str);
+        return bRet;
     }
-
 }
+//file handling in c : read the below system calls or function
+// creat - open - close - read - write - lseek -

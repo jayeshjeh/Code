@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<fcntl.h>
-//#include<io.h>
 
 int main()
 {
@@ -24,7 +23,7 @@ int main()
     {
         printf("File successfully opened with FD : %d\n",fd);
     }
-    printf("Data from file is :\n");
+    printf("Data from file is : \n");
 
     while((iRet=read(fd,Buffer,sizeof(Buffer)))!=0)
     {

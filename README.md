@@ -467,7 +467,18 @@ prgm175.c - hole in file, using 8 in end.
 
 prgm176.c - Accept file name from user and count number of specific char.
 
-prgm177.c - 
+prgm177.c - Count Number of vowels
+
+prgm178.c - 
+
+prgm179.c
+
+prgm180.c
+
+prgm181.c
+
+prgm182.c
+
 
 
 

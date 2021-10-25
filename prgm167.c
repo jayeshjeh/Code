@@ -20,7 +20,7 @@ int main()
     if(fdsrc == -1)
     {
         printf("Unable to open the file\n");
-        return -1; //return to OS
+        return -1;                              //return to OS
     }
     else
     {

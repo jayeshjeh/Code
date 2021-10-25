@@ -5,7 +5,7 @@
 
 int main()
 {
-    int fd = 0,iRet=0;
+    int fd = 0,iRet=0,iCnt=0;
     char Fname[30];
     char Buffer[10];             //Mug
 
@@ -29,6 +29,7 @@ int main()
     {
         write(1,Buffer,iRet);
     }
+
     close(fd);
     return 0;
 }

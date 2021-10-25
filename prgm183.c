@@ -8,7 +8,6 @@ int main()
     int fd =0, iRet=0;
     char Fname[20];
 
-
     printf("Enter file name\n");
     scanf("%s",Fname);
 

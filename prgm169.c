@@ -8,7 +8,7 @@ int main()
     int fd = 0;
     char Arr[]= "Hello";
 
-    fd = open("LB17.txt",O_RDWR);
+    fd = open("LB17.txt",O_RDWR | O_APPEND);
     if(fd == -1)
     {
         printf("Unable to open file\n");

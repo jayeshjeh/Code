@@ -21,7 +21,6 @@ int main()
     lseek(fd,-5,2);
     read(fd,Arr,5);
 
-
     write(1,Arr,5);
 
     printf("\n");

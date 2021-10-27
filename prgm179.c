@@ -29,7 +29,7 @@ int main()
             }
         }
    }
-    printf("Total number of a are : %d\n",iCnt);
+    printf("Total number of Capital characters are : %d\n",iCnt);
     close(fd);
     return 0;
 }

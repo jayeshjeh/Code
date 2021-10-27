@@ -479,6 +479,19 @@ prgm181.c
 
 prgm182.c
 
+prgm183.c
+
+prgm183.c
+
+prgm183.c
+
+prgm183.c
+
+prgm183.c
+
+~~~~~~~~~~~~~~BITWISE CONTINUE~~~~~~~~~~~~~~~
+
+
 
 
 

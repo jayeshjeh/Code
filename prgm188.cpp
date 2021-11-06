@@ -2,7 +2,6 @@
 using namespace std;
 
 typedef unsigned int UNIT;
-
 /*
     op1   op2      &      |       ^
     1       0      0      1        1
@@ -26,6 +25,7 @@ UNIT ToggleBit(UNIT iNo,int iPos)
     iResult = iNo ^ iMask;
     return iResult;
 }
+
 int main()
 {
     int iValue =0,iRet =0,i=0;

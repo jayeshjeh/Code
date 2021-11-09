@@ -25,7 +25,8 @@ void InsertFirst(PPNODE Head, int no)
     }
     else
     {
-        *
+        newn->next = *Head;
+        *Head = newn;
     }
 }
 
@@ -33,7 +34,9 @@ void InsertLast(PPNODE Head, int no)
 {
     PNODE newn = NULL;
     PNODE temp = *Head;
+
     newn = (PNODE)malloc(sizeof(NODE));    //1st - Allocate the memory
+    
     newn->data = no;                        //Initialise the node
     newn->next = NULL;
 
@@ -51,13 +54,41 @@ void InsertLast(PPNODE Head, int no)
     }
 }
 
+void Display(PNODE Head)
+{
+    while(Head != NULL)
+    {
+        printf("%d\t",Head->data);
+        Head = Head->next;
+    }
+}
+
+int Count(PNODE Head)
+{
+    int iCnt =0;
+    while(Head != NULL)
+    {
+        iCnt++;
+        Head = Head->next;
+    }
+    return iCnt;
+}
+
 int main()
 {
     PNODE first = NULL;
+    int iRet =0;
 
+    InsertFirst(&first,101);
     InsertFirst(&first,51);     //InsertFirst(50,51)
     InsertFirst(&first,21);     //InsertFirst(50,21)
     InsertFirst(&first,11);     //InsertFirst(50,11)
+
+    InsertLast(&first,111);
+    Display(first);
+    iRet = Count(first);
+
+    printf("\n Number of elements are : %d\n",iRet);
 
     return 0;
 }

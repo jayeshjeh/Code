@@ -15,9 +15,9 @@ int main()
 {
     PNODE first = NULL;
 
-    fun(first);
+    fun(first);         //Call by Value
 
-    gun(&first);
+    gun(&first);        // Call by Address
    
     return 0;
 }

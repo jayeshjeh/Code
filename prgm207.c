@@ -72,12 +72,35 @@ void InsertLast(PPNODE Head, int no)
 
 void DeleteFirst(PPNODE Head)
 {
-
+    PNODE temp = *Head;
+    if(*Head != NULL)
+    {
+        *Head = (*Head)->next;
+        free(temp);
+    }
 }
 
 void DeleteLast(PPNODE Head)
 {
-
+    PNODE temp = *Head;
+    if(*Head == NULL)
+    {
+        return ;
+    }
+    else if((*Head)->next == NULL)
+    {
+        free(*Head);
+        *Head = NULL;
+    }
+    else
+    {
+        while(temp->next->next != NULL)
+        {
+            temp = temp->next;
+        }
+        free(temp->next);
+        temp->next = NULL;
+    }
 }
 
 int main()

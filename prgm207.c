@@ -110,7 +110,7 @@ int main()
 
     while(iChoice != 0)
     {
-        printf("\n___________________________________________________________________\n");
+        printf("\n____________________________________________________\n");
         printf("Enter desired operation that you want to perform in LinkedList\n");
         printf("1 : Insert the node at first position\n");
         printf("2 : Insert the node at the last position\n");
@@ -121,9 +121,9 @@ int main()
         printf("7 : Display the contents of LinkedList\n");
         printf("8 : Count the number of nodes from LinkedList\n");
         printf("0 : Terminate the application\n");
-        scanf("%d",&iChoice);
-        printf("\n___________________________________________________________________\n");
+        printf("\n____________________________________________________\n");
 
+        scanf("%d",&iChoice);
         switch(iChoice)
         {
             case 1:

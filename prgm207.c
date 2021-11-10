@@ -148,6 +148,7 @@ void DeleteAtPos(PPNODE Head, int iPos)
     int size =0;
     PNODE temp = *Head;
     int i =0;
+    PNODE targeted = NULL;
 
     size = Count(*Head);
 
@@ -171,8 +172,10 @@ void DeleteAtPos(PPNODE Head, int iPos)
         {
             temp = temp->next;
         }
-        
+        targeted = temp->next;
 
+        temp-> next = targeted->next;
+        free(targeted);
     }
 }
 
@@ -230,7 +233,7 @@ int main()
             case 6:
             printf("Enter the position\n");
             scanf("%d",&pos);
-            //DeleteAtPos(&first,pos);
+            DeleteAtPos(&first,pos);
             break;
 
             case 7:

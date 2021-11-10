@@ -103,6 +103,79 @@ void DeleteLast(PPNODE Head)
     }
 }
 
+void InsertAtPos(PPNODE Head, int no, int iPos)
+{
+    int size =0;
+    PNODE newn = NULL;
+    PNODE temp = *Head;
+    int i =0;
+
+    size = Count(*Head);
+
+    if((iPos<1)||(iPos> size+1))        //Filter for invalid position
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    if(iPos == 1)                       //First Position
+    {
+        InsertFirst(Head,no);
+    }
+    else if(iPos == size+1)             //Last Position
+    {
+        InsertLast(Head,no);
+    }
+    else                                //In between Position
+    {
+        newn = (PNODE)malloc(sizeof(NODE));
+
+        newn->data = no;
+        newn->next = NULL;
+
+        for(i=1;i<iPos-1;i++)
+        {
+            temp = temp->next;
+        }
+        newn -> next = temp->next;
+        temp->next = newn;
+
+    }
+}
+
+void DeleteAtPos(PPNODE Head, int iPos)
+{
+    int size =0;
+    PNODE temp = *Head;
+    int i =0;
+
+    size = Count(*Head);
+
+    if((iPos<1)||(iPos> size))        //Filter for invalid position
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    if(iPos == 1)                       //First Position
+    {
+        DeleteFirst(Head);
+    }
+    else if(iPos == size)             //Last Position
+    {
+        DeleteLast(Head);
+    }
+    else                                //In between Position
+    {
+        for(i=1;i<iPos-1;i++)
+        {
+            temp = temp->next;
+        }
+        
+
+    }
+}
+
 int main()
 {
     PNODE first = NULL;
@@ -143,7 +216,7 @@ int main()
             scanf("%d",&value);
             printf("Enter the position\n");
             scanf("%d",&pos);
-            //InsertAtPos(&first,value);
+            InsertAtPos(&first,value,pos);
             break;
 
             case 4:

@@ -167,7 +167,43 @@ void InsertAtPos(PPNODE Head, int no, int iPos)
         {
             temp = temp->next;
         }
+        newn->next = temp->next;
+        newn->next->prev = newn;
+        temp->next = newn;
+        newn->prev = temp;
+    }
+}
+
+void DeleteAtPos(PPNODE Head, int iPos)
+{
+    int size = Count(*Head);
+    int i =0;
+    PNODE temp = *Head;
+    
+    if((iPos<1)||(iPos > size))
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    if(iPos == 1)
+    {
+        DeleteFirst(Head);
+    }
+    else if(iPos == size)
+    {
+        DeleteLast(Head);
+    }
+    else
+    {
+        for(i=1;i<iPos-1;i++)
+        {
+            temp = temp->next;
+        }
         
+        temp->next = temp->next->next;
+        free(temp->next->prev);
+        temp->next->prev = temp;
     }
 }
 

@@ -81,7 +81,7 @@ int main()
     PNODE first = NULL;
 
     InsertFirst(&first,51);
-    Insertfirst(&first,21);
+    InsertFirst(&first,21);
     InsertFirst(&first,11);
 
     InsertLast(&first,101);

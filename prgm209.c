@@ -77,7 +77,7 @@ int Count(PNODE Head)
     return iCnt;
 }
 
-void DeleteFirst(PPNODE Head)
+void DeleteFirstX(PPNODE Head)
 {
     PNODE temp = *Head;
     if(*Head != NULL)       //LL contains atleast one node
@@ -91,7 +91,7 @@ void DeleteFirst(PPNODE Head)
     }
 }
 
-void DeleteFirstX(PPNODE Head)
+void DeleteFirst(PPNODE Head)
 {
     if(*Head == NULL)
     {
@@ -134,9 +134,41 @@ void DeleteLast(PPNODE Head)
     }
 }    
 
-void DeleteLast(PPNODE Head)
+void InsertAtPos(PPNODE Head, int no, int iPos)
 {
+    int size = Count(*Head);
+    int i =0;
+    PNODE temp = *Head;
+    PNODE newn = NULL;
 
+    if((iPos<1)||(iPos > size+1))
+    {
+        printf("Invalid position\n");
+        return;
+    }
+
+    if(iPos == 1)
+    {
+        InsertFirst(Head,no);
+    }
+    else if(iPos == size+1)
+    {
+        InsertLast(Head, no);
+    }
+    else
+    {
+        newn = (PNODE)malloc(sizeof(NODE));
+
+        newn->data = no;
+        newn->next = NULL;
+        newn->prev = NULL;
+
+        for(i=1;i<iPos-1;i++)
+        {
+            temp = temp->next;
+        }
+        
+    }
 }
 
 int main()

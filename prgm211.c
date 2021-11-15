@@ -120,7 +120,7 @@ int main()
 
     Display(first,last);
     iret = Count(first,last);
-    printf("Number of elements are : %d",iret);
+    printf("Number of elements are : %d\n",iret);
 
     return 0;
 }

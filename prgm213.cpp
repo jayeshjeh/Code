@@ -218,6 +218,7 @@ int main()
     obj.InsertLast(101);
 
     obj.InsertAtPos(55,4);
+    
     obj.Display();
     iret = obj.Count();
     cout<<"Number of elements are :"<<iret<<"\n";

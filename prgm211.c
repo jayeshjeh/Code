@@ -70,7 +70,9 @@ void DeleteFirst(PPNODE Head, PPNODE Tail)
     }
     else
     {
-
+        *Head = (*Head)->next;
+        free((*Tail)->next);
+        (*Tail) ->next = *Head;
     }
 }
 

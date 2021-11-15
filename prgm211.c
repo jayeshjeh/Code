@@ -78,6 +78,8 @@ void DeleteFirst(PPNODE Head, PPNODE Tail)
 
 void DeleteLast(PPNODE Head, PPNODE Tail)
 {
+    PNODE temp = *Head;
+
     if((*Head == NULL) && (*Tail == NULL))
     {
         return;
@@ -90,7 +92,10 @@ void DeleteLast(PPNODE Head, PPNODE Tail)
     }
     else
     {
-        
+        while(temp->next != *Tail)
+        {
+            temp = temp->next;
+        }
     }
 }
 

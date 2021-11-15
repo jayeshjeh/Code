@@ -217,15 +217,19 @@ int main()
 
     obj.InsertLast(101);
 
+    obj.InsertAtPos(55,4);
     obj.Display();
     iret = obj.Count();
     cout<<"Number of elements are :"<<iret<<"\n";
 
+    obj.DeleteAtPos(4);
     obj.DeleteFirst();
     obj.DeleteLast();
     obj.Display();
     iret = obj.Count();
     cout<<"Number of elements are :"<<iret<<"\n";
+
+    
 
     return 0;
 }

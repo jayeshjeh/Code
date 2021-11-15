@@ -192,7 +192,7 @@ int main()
         printf("2 : Insert the node at the last position\n");
         printf("3 : Insert the node at desired position\n");
         printf("4 : Delete the first node\n");
-        printf("5 : Insert the last node\n");
+        printf("5 : Delete the last node\n");
         printf("6 : Delete the node at desired position\n");
         printf("7 : Display the contents of LinkedList\n");
         printf("8 : Count the number of nodes from LinkedList\n");

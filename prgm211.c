@@ -58,12 +58,38 @@ void InsertAtPos(PPNODE Head, PPNODE Tail, int no, int ipos)
 
 void DeleteFirst(PPNODE Head, PPNODE Tail)
 {
+    if((*Head == NULL) && (*Tail == NULL))
+    {
+        return;
+    }
+    else if(*Head == *Tail)
+    {
+        free(*Head);
+        *Head = NULL;
+        *Tail = NULL;
+    }
+    else
+    {
 
+    }
 }
 
-void DeleteLast(PPNODE Head, PPNODE tail)
+void DeleteLast(PPNODE Head, PPNODE Tail)
 {
-
+    if((*Head == NULL) && (*Tail == NULL))
+    {
+        return;
+    }
+    else if(*Head == *Tail)
+    {
+        free(*Head);
+        *Head = NULL;
+        *Tail = NULL;
+    }
+    else
+    {
+        
+    }
 }
 
 void DeleteAtPos(PPNODE Head, PPNODE Tail, int ipos)

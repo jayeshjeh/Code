@@ -73,12 +73,35 @@ void DeleteAtPos(PPNODE Head, PPNODE Tail, int ipos)
 
 void Display(PNODE Head, PNODE Tail)
 {
+    if((Head == NULL) && (Tail == NULL))
+    {
+        return;
+    }
+    do
+    {
+        printf("|%d|->",Head->data);
+        Head = Head->next;
+    } while (Head != Tail->next);
 
+    printf("\n");
+    
 }
 
 int Count(PNODE Head, PNODE Tail)
 {
+    int iCnt =0;
+    if((Head == NULL) && (Tail == NULL))
+    {
+        return 0;
+    }
+    do
+    {
+        iCnt++;
+        Head = Head->next;
+    } while (Head != Tail->next);
 
+    return iCnt;
+    
 
     return 0;
 }

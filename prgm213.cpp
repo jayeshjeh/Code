@@ -176,7 +176,33 @@ public:
 
     void DeleteAtPos(int ipos)
     {
+        if((ipos<1) || (ipos > size))
+        {
+            return;
+        }
 
+        if(ipos == 1 )
+        {
+            DeleteFirst();
+        }
+        else if(ipos == size)
+        {
+            DeleteLast();
+        }
+        else
+        {
+            PNODE temp = first;
+            for(int i=1;i<ipos-1;i++)
+            {
+                temp = temp->next;
+            }
+            PNODE targeted = temp->next;
+
+            temp->next = targeted->next;
+            delete targeted;
+
+            size--;
+        }
     }
 };
 

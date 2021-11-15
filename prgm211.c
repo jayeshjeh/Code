@@ -158,5 +158,12 @@ int main()
     iret = Count(first,last);
     printf("Number of elements are : %d\n",iret);
 
+    DeleteFirst(&first,&last);
+    DeleteLast(&first,&last);
+
+    Display(first,last);
+    iret = Count(first,last);
+    printf("Number of elements are : %d\n",iret);
+
     return 0;
 }

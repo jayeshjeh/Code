@@ -96,6 +96,9 @@ void DeleteLast(PPNODE Head, PPNODE Tail)
         {
             temp = temp->next;
         }
+        free(*Tail);
+        *Tail = temp;
+        (*Tail)->next = *Head;
     }
 }
 

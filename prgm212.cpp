@@ -103,18 +103,46 @@ public:
         }
         else if(first == last)
         {
-
+            delete first;
+            first = NULL;
+            last = NULL;
         }
         else
         {
-            
+            first = first->next;
+            delete last->next;
+            last->next = first;
         }
+        size--;
     }
 
     void DeleteLast()
     {
+        PNODE temp = first;
 
+        if((first == NULL) && (last == NULL))
+        {
+            return;
+        }
+        else if(first == last)
+        {
+            delete first;
+            first = NULL;
+            last = NULL;
+        }
+        else
+        {
+            while(temp->next != last)
+            {
+                temp = temp->next;
+            }
+            delete(last);
+            last = temp;
+            last->next = first;
+        }
+        size--;
     }
+
     void DeleteAtPos(int ipos)
     {
 

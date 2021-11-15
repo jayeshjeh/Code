@@ -24,19 +24,93 @@ public:
     }  
 
     void Display()
-    {}
+    {
+        PNODE temp = first;
+
+        if((first == NULL) && (last == NULL))
+        {
+            return;
+        }
+
+        do
+        {
+            cout<<"|"<<temp->data<<"|->";
+            temp = temp->next;
+        } while(temp != last->next);
+        
+        cout<<"\n";
+    }
+
     int Count()
     {
         return size;
     }  
+
     void InsertFirst(int no)
-    {}
+    {
+        PNODE newn = new NODE;
+
+        newn->data = no;
+        newn->next = NULL;
+
+        if((first == NULL) && (last == NULL))
+        {
+            first = newn;
+            last = newn;
+        }
+        else
+        {
+            newn->next = first;
+            first = newn;
+        }
+
+        last ->next = first;
+        size++;
+    }
+
     void InsertLast(int no)
-    {}
+    {
+        PNODE newn = new NODE;
+
+        newn->data = no;
+        newn->next = NULL;
+
+        if((first == NULL) && (last == NULL))
+        {
+            first = newn;
+            last = newn;
+        }
+        else
+        {
+            last->next = newn;
+            last = newn;
+        }
+
+        last ->next = first;
+        size++;
+    }
+
     void InsertAtPos(int no, int ipos)
-    {}
+    {
+
+    }
+
     void DeleteFirst()
-    {}
+    {
+        if((first == NULL) && (last == NULL))
+        {
+            return;
+        }
+        else if(first == last)
+        {
+
+        }
+        else
+        {
+            
+        }
+    }
+
     void DeleteLast()
     {
 
@@ -61,8 +135,6 @@ int main()
     obj.Display();
     iret = obj.Count();
     cout<<"Number of elements are :"<<iret<<"\n";
-
-    return 0;
 
     return 0;
 }

@@ -87,10 +87,17 @@ int main()
 {
     PNODE first = NULL;
     PNODE last = NULL;
+    int iret =0;
 
     InsertFirst(&first, &last, 51);
     InsertFirst(&first, &last, 21);
     InsertFirst(&first, &last, 11);
+
+    InsertLast(&first,&last,101);
+
+    Display(first,last);
+    iret = Count(first,last);
+    printf("Number of elements are : %d",iret);
 
     return 0;
 }

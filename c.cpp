@@ -1,5 +1,4 @@
 #include<iostream>
-
 using namespace std;
 
 typedef struct node
@@ -15,7 +14,7 @@ private:
     PNODE first;
     PNODE last;
     int size;
-
+    
 public:
     DoublyCL()
     {
@@ -23,26 +22,27 @@ public:
         last = NULL;
         size = 0;
     }
-
+    
     void Display();
     int Count();
     void InsertFirst(int no);
     void InsertLast(int no);
-    void InsertAtPos(int no, int ipos);
+    void InsertAtPos(int no , int ipos);
     void DeleteFirst();
     void DeleteLast();
     void DeleteAtPos(int ipos);
 };
 
-//Return_Value Class Name :: Function_Name(Parameters)
+// Return_Value Class_Name :: Fnuction_Name(Parameters)
+
 void DoublyCL :: InsertFirst(int no)
 {
     PNODE newn = new NODE;
-
+    
     newn->data = no;
     newn->next = NULL;
     newn->prev = NULL;
-
+    
     if((first == NULL) && (last == NULL))
     {
         first = newn;
@@ -50,24 +50,24 @@ void DoublyCL :: InsertFirst(int no)
     }
     else
     {
-        newn -> next = first;
+        newn->next = first;
         first -> prev = newn;
         first = newn;
     }
-
-    last -> next = first;
-    first -> prev = last;
+    
+    last->next = first;
+    first->prev = last;
     size++;
 }
 
 void DoublyCL :: InsertLast(int no)
 {
     PNODE newn = new NODE;
-
-    newn -> data = no;
-    newn -> next = NULL;
-    newn -> prev = NULL;
-
+    
+    newn->data = no;
+    newn->next = NULL;
+    newn->prev = NULL;
+    
     if((first == NULL) && (last == NULL))
     {
         first = newn;
@@ -76,23 +76,22 @@ void DoublyCL :: InsertLast(int no)
     else
     {
         last -> next = newn;
-        newn -> prev = last;
+        newn->prev = last;
         last = newn;
     }
     
-    last -> next = first;
-    first -> prev = last;
+    last->next = first;
+    first->prev = last;
     size++;
 }
 
 void DoublyCL :: Display()
 {
     PNODE temp = first;
-    int i=0;
-
-    for(i=1; i <= size; i++)
+    
+    for(int i = 1; i <= size; i++)
     {
-        cout<<"|"<<temp->data<<"|->";
+        cout<<"|"<<temp->data<<"|-> ";
         temp = temp->next;
     }
     cout<<"\n";
@@ -100,7 +99,6 @@ void DoublyCL :: Display()
 
 int DoublyCL :: Count()
 {
-
     return size;
 }
 
@@ -113,18 +111,17 @@ void DoublyCL :: DeleteFirst()
     else if(first == last)
     {
         delete first;
-        first = NULL;
+        first  = NULL;
         last = NULL;
     }
-    else 
+    else
     {
-        first = first->next;
+        first -> next = first;
         delete last->next;
         first->prev = last;
-        last -> next = first;
+        last->next = first;
     }
     size--;
-  
 }
 
 void DoublyCL :: DeleteLast()
@@ -136,65 +133,64 @@ void DoublyCL :: DeleteLast()
     else if(first == last)
     {
         delete first;
-        first = NULL;
+        first  = NULL;
         last = NULL;
     }
-    else 
+    else
     {
-        last = last-> prev;
+        last = last -> prev;
         delete last->next;
         first->prev = last;
-        last -> next = first;
+        last->next = first;
     }
-    
     size--;
 }
 
 void DoublyCL :: InsertAtPos(int no, int ipos)
 {
-    if((ipos<1) || (ipos > size+1))
+    if((ipos < 1) || (ipos > size+1))
     {
         return;
     }
-
+    
     if(ipos == 1)
     {
         InsertFirst(no);
     }
-    else if(ipos == size + 1)
+    else if(ipos == size +1)
     {
         InsertLast(no);
     }
     else
     {
-        PNODE newn = new NODE;
+        PNODE newn= new NODE;
+        
         newn->data = no;
         newn->next = NULL;
         newn->prev = NULL;
-
+        
         PNODE temp = first;
-
-        for(int i=1;i<ipos-1;i++)
+        
+        for(int i = 1; i < ipos -1; i++)
         {
-            temp = temp ->next;
+            temp = temp -> next;
         }
-
-        newn -> next = temp->next;
-        newn -> next -> prev = newn;
-        temp ->next = newn;
-        newn-> prev = temp;
-        size++;
+        
+        newn->next = temp->next;
+        newn->next->prev = newn;
+        temp->next = newn;
+        newn->prev = temp;
+        size ++;
     }
-
 }
+
 void DoublyCL :: DeleteAtPos(int ipos)
 {
-    if((ipos<1) || (ipos>size))
+    if((ipos < 1) || (ipos > size))
     {
         return;
     }
-
-    if(ipos == 1)
+    if(ipos ==1)
     {
         DeleteFirst();
     }
@@ -205,16 +201,16 @@ void DoublyCL :: DeleteAtPos(int ipos)
     else
     {
         PNODE temp = first;
-
-        for(int i =1; i<ipos-1; i++)
-        {
-            temp = temp-> next;
-        }
         
-        temp->next = temp->next->next;
+        for(int i = 1; i < ipos -1 ; i ++)
+        {
+            temp = temp -> next;
+        }
+       
+        temp -> next = temp->next->next;
         delete temp->next->prev;
         temp->next->prev = temp;
-
+        
         size--;
     }
 }
@@ -222,25 +218,23 @@ void DoublyCL :: DeleteAtPos(int ipos)
 int main()
 {
     DoublyCL obj;
+    
     obj.InsertFirst(21);
     obj.InsertFirst(11);
-
+    
     obj.InsertLast(51);
     obj.InsertLast(101);
-
+    
     obj.InsertAtPos(75,3);
-
     obj.Display();
-
+    
     int iret = obj.Count();
     cout<<"Number of elements are : "<< iret<<"\n";
-
+    
     obj.DeleteAtPos(3);
     obj.DeleteFirst();
     obj.DeleteLast();
-
+    
     obj.Display();
-
-
     return 0;
 }

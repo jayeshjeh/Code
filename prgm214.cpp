@@ -33,7 +33,6 @@ public:
     void DeleteLast();
     void DeleteAtPos(int ipos);
 };
-
 //Return_Value Class Name :: Function_Name(Parameters)
 void DoublyCL :: InsertFirst(int no)
 {

@@ -155,15 +155,15 @@ SinglyLL<T>::SinglyLL()
 
 int main()
 {
-    SinglyLL <int>obj;
+    SinglyLL <char>obj;
     int iret =0;
 
-    obj.InsertFirst(51);
-    obj.InsertFirst(21);
-    obj.InsertFirst(11);
+    obj.InsertFirst('A');
+    obj.InsertFirst('B');
+    obj.InsertFirst('C');
 
-    obj.InsertLast(101);
-    obj.InsertLast(111);
+    obj.InsertLast('D');
+    obj.InsertLast('E');
 
     obj.Display();
 

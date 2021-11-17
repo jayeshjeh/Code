@@ -1,9 +1,9 @@
 #include<iostream>      //Generic Programming
 using namespace std;
 
-void Swap(float *p, float *q)
+void Swap(char *p, char *q)
 {
-    float temp;
+    char temp;
 
     temp = *p;
     *p = *q;
@@ -12,12 +12,12 @@ void Swap(float *p, float *q)
 
 int main()
 {
-    float x =0, y = 0;
+    char x ='\0', y = '\0';
 
-    cout<<"Enter first number\n";
+    cout<<"Enter first character\n";
     cin>>x;
 
-    cout<<"Enter second Number\n";
+    cout<<"Enter second character\n";
     cin>>y;
 
     Swap(&x,&y);

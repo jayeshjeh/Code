@@ -20,7 +20,7 @@ public:
         size =0;
     }
 
-    void push(int no) //InsertFirst
+    void push(int no)       //InsertFirst
     {
         PNODE newn = new NODE;
         newn->data = no;
@@ -38,7 +38,7 @@ public:
         size++;
     }
 
-    int pop()       //Delete First
+    int pop()                  //Delete First
     {
         int no =0;
         PNODE temp = first;

@@ -24,18 +24,17 @@ void SwapX(T *p, T *q)
 
 int main()
 {
-    char x ='\0', y = '\0';
-
-    cout<<"Enter first character\n";
-    cin>>x;
-
-    cout<<"Enter second character\n";
-    cin>>y;
-
+    char x ='A', y = 'B';
     SwapX(&x,&y);
 
-    cout<<"Value of X becomes : "<<x<<"\n";
-    cout<<"Value of Y becomes :  "<<y<<"\n";
+    cout<<"Enter first character : "<<x<<"\n";
+    cout<<"Enter second character : "<<y<<"\n";
+
+    int i = 11, j = 21;
+    SwapX(&i,&j);
+
+    cout<<"Value of X becomes : "<<i<<"\n";
+    cout<<"Value of Y becomes :  "<<j<<"\n";
 
     return 0;
 }

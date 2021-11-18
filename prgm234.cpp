@@ -13,7 +13,6 @@ void InsertFirst(PPNODE Head, int no)
 {
     PNODE newn = new NODE;
 
-
     newn->data= no;
     newn->next = NULL;
 
@@ -26,7 +25,6 @@ void InsertFirst(PPNODE Head, int no)
         newn->next = *Head;
         *Head = newn;
     }
-
 }
 
 void DisplayR(PNODE Head)
@@ -66,4 +64,4 @@ int main()
     cout<<"Number of elements are "<<iRet<<"\n";
 
     return 0;
-    }
+}

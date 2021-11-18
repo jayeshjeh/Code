@@ -29,23 +29,24 @@ void InsertFirst(PPNODE Head, int no)
 
 }
 
-void Display(PNODE Head)
+void DisplayR(PNODE Head)
 {
-    while(Head != NULL)
+    if(Head != NULL)
     {
-        cout<<"|"<<Head->data<<"|->";
+        cout<<"|"<<Head->data<<"|->""\n";
         Head = Head->next;
+        DisplayR(Head);
     }
-    cout<<"\n";
 }
 
-int Count(PNODE Head)
+int CountR(PNODE Head)
 {
-    int iCnt =0;
-    while(Head!= NULL)
+    static int iCnt =0;
+    if(Head!= NULL)
     {
         iCnt++;
         Head = Head->next;
+        CountR(Head);
     }
     return iCnt;
 }
@@ -59,9 +60,9 @@ int main()
     InsertFirst(&first,51);
     InsertFirst(&first,11);
 
-    Display(first);
+    DisplayR(first);
 
-    iRet = Count(first);
+    iRet = CountR(first);
     cout<<"Number of elements are "<<iRet<<"\n";
 
     return 0;

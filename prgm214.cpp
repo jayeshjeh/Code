@@ -239,7 +239,8 @@ int main()
     obj.DeleteLast();
 
     obj.Display();
-
+    iret = obj.Count();
+    cout<<"Number of elements are : "<< iret<<"\n";
 
     return 0;
 }

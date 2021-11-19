@@ -26,16 +26,27 @@ void Insert(PPNODE Head, int no)
         {
             if(temp->data == no)
             {
+                cout<<"Duplicate node\n";
                 delete newn;
                 break;
             }
-            else if(temp->data > no)
+            else if(no< (temp->data))
             {
-
+                if(temp -> lchild == NULL)
+                {
+                    temp-> lchild = newn;
+                    break;
+                }
+                temp = temp-> lchild;
             }
-            else(temp->data < no)
+            else(no > (temp -> data))
             {
-
+                if(temp -> rchild == NULL)
+                {
+                    temp -> rchild = newn;
+                    break;
+                }
+                temp = temp -> rchild;
             }
         }
     }

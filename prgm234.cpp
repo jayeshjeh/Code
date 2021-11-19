@@ -56,6 +56,7 @@ int main()
 
     InsertFirst(&first,101);
     InsertFirst(&first,51);
+    InsertFirst(&first,21);
     InsertFirst(&first,11);
 
     DisplayR(first);

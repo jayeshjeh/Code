@@ -103,7 +103,7 @@ int Count(PNODE Head)
 
 int main()
 {
-    int no = 0;
+    int no = 0,iret=0;
     bool bret = false;
     
     PNODE first = NULL;
@@ -124,7 +124,9 @@ int main()
     {
         cout<<"Data is not there\n";
     }
-    
+    iret = Count(first);
+
+    cout<<"Number of nodes are "<<iret<<"\n";
     return 0;
 }
 

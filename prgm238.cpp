@@ -111,9 +111,24 @@ int CountLeaf(PNODE Head)
         {
             iCnt++;
         }
-        iCnt++;
-        Count(Head -> lchild);
-        Count(Head -> rchild);
+        CountLeaf(Head -> lchild);
+        CountLeaf(Head -> rchild);
+    }
+    return iCnt;
+}
+
+int CountParent(PNODE Head)
+{
+    static int iCnt = 0;
+
+    if(Head != NULL)
+    {
+        if((Head -> lchild != NULL) || (Head -> rchild != NULL))
+        {
+            iCnt++;
+        }
+        CountParent(Head -> lchild);
+        CountParent(Head -> rchild);
     }
     return iCnt;
 }
@@ -141,9 +156,16 @@ int main()
     {
         cout<<"Data is not there\n";
     }
-    iret = Count(first);
 
+    iret = Count(first);
     cout<<"Number of nodes are "<<iret<<"\n";
+
+    iret = CountLeaf(first);
+    cout<<"Number of leaf nodes are "<<iret<<"\n";
+
+    iret = CountParent(first);
+    cout<<"Number of Parent nodes are "<<iret<<"\n";
+    
     return 0;
 }
 

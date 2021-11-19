@@ -39,7 +39,7 @@ void Insert(PPNODE Head, int no)
                 }
                 temp = temp-> lchild;
             }
-            else(no > (temp -> data))
+            else if(no > (temp -> data))
             {
                 if(temp -> rchild == NULL)
                 {
@@ -52,13 +52,58 @@ void Insert(PPNODE Head, int no)
     }
 }
 
+bool Search(PNODE Head, int no)
+{
+    bool flag = false;
+    if(Head == NULL)        // if tree is empty
+    {
+        return false;
+    }
+    else                // tree contains atleast one node
+    {
+        while(Head != NULL)
+        {
+            if(Head -> data == no)     //node found
+            {
+                flag = true;
+                break;
+            }
+            else if(no > (Head->data))
+            {
+                Head = Head -> rchild;
+            }
+            else if(no < (Head->data))
+            {
+                Head = Head -> lchild;
+            }
+            return flag;
+        }
+    }
+
+}
+
 int main()
 {
+    int no = 0;
+    bool bret = false;
     PNODE first = NULL;
 
     Insert(&first,51);
     Insert(&first,21);
     Insert(&first,101);
+
+    cout<<"Enter number to search\n";
+    cin>>no;
+
+    bret = Search(first, no);
+    if(bret = true)
+    {
+        cout<<"Data is there\n";
+    }
+    else
+    {
+        cout<<"Data is not there\n";
+    }
 
     return 0;
 }

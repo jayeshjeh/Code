@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 typedef struct node
@@ -6,97 +6,99 @@ typedef struct node
     int data;
     struct node *lchild;
     struct node *rchild;
-}NODE,*PNODE,**PPNODE;
+}NODE, *PNODE, **PPNODE;
 
-void Insert(PPNODE Head, int no)
+void Insert(PPNODE Head,  int no)
 {
+    PNODE temp = *Head;
     PNODE newn = new NODE;
-    newn -> data = no;
-    newn -> lchild = NULL;
-    newn -> rchild = NULL;
-
+    
+    newn->data = no;
+    newn->lchild = NULL;
+    newn->rchild = NULL;
+    
     if(*Head == NULL)
     {
         *Head = newn;
     }
     else
     {
-        PNODE temp = *Head;
-        while(1) //UnconditionalLoop    forloop for(;;)
-        {
-            if(temp->data == no)
+            while(1)    // Unconditional Loop       for( ; ; )
             {
-                cout<<"Duplicate node\n";
-                delete newn;
-                break;
-            }
-            else if(no< (temp->data))
-            {
-                if(temp -> lchild == NULL)
+                if(temp->data == no)
                 {
-                    temp-> lchild = newn;
+                    cout<<"Duplicate node\n";
+                    
+                    delete newn;
                     break;
                 }
-                temp = temp-> lchild;
-            }
-            else if(no > (temp -> data))
-            {
-                if(temp -> rchild == NULL)
+                else if(no < (temp->data))    // lahan data
                 {
-                    temp -> rchild = newn;
-                    break;
+                    if(temp -> lchild == NULL)
+                    {
+                        temp->lchild = newn;
+                        break;
+                    }
+                    temp = temp -> lchild;
                 }
-                temp = temp -> rchild;
+                else if(no > (temp->data))    // motha data
+                {
+                    if(temp -> rchild == NULL)
+                    {
+                        temp->rchild = newn;
+                        break;
+                    }
+                    temp = temp->rchild;
+                }
             }
-        }
     }
 }
 
-bool Search(PNODE Head, int no)
+bool Search(PNODE Head , int no)
 {
     bool flag = false;
-    if(Head == NULL)        // if tree is empty
+    if(Head == NULL)    // if treee is empty
     {
         return false;
     }
-    else                // tree contains atleast one node
+    else    // tree contains atleast one node
     {
         while(Head != NULL)
         {
-            if(Head -> data == no)     //node found
+            if(Head -> data == no)  // node sapadala
             {
                 flag = true;
                 break;
             }
-            else if(no > (Head->data))
+            else if(no > (Head -> data))
             {
-                Head = Head -> rchild;
+                Head = Head->rchild;
             }
-            else if(no < (Head->data))
+            else if(no < (Head -> data))
             {
                 Head = Head -> lchild;
             }
-            return flag;
         }
+        return flag;
     }
-
 }
 
 int main()
 {
     int no = 0;
     bool bret = false;
+    
     PNODE first = NULL;
-
+    
     Insert(&first,51);
     Insert(&first,21);
     Insert(&first,101);
-
+   
     cout<<"Enter number to search\n";
     cin>>no;
-
-    bret = Search(first, no);
-    if(bret = true)
+    
+    bret = Search(first,no);
+    if(bret == true)
     {
         cout<<"Data is there\n";
     }
@@ -104,6 +106,38 @@ int main()
     {
         cout<<"Data is not there\n";
     }
-
+    
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

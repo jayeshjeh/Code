@@ -70,7 +70,7 @@ bool Search(PNODE Head , int no)
             }
             else if(no > (Head -> data))
             {
-                Head = Head->rchild;
+                Head = Head-> rchild;
             }
             else if(no < (Head -> data))
             {

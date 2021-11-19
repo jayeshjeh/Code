@@ -165,7 +165,7 @@ int main()
 
     iret = CountParent(first);
     cout<<"Number of Parent nodes are "<<iret<<"\n";
-    
+
     return 0;
 }
 

@@ -223,5 +223,12 @@ int main()
     icnt = Count(first);
     printf("Number of elements are : %d\n",icnt);
 
+    InsertAtPos(&first,55,3);
+    DeleteAtPos(&first,2);
+
+    Display(first);
+    icnt = Count(first);
+    printf("Number of elements are : %d\n",icnt);
+
     return 0;
 }

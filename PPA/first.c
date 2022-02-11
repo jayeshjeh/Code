@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-int no;
+extern int no;
 
 int main()
 {

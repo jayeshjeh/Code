@@ -4,9 +4,9 @@ int main()
 {
     int arr[5] = {10, 20, 30, 40, 50};
     
-    int *p = NULL;
+    int *p = &(arr[0]);
 
-    int *q = NULL;
+    int *q = &(arr[4]);
 
     return 0;
 }

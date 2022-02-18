@@ -4,6 +4,7 @@ int main()
 {
     int no = 11;
 
+    int *x = &no;
     int *p = &no;
     int **q = &p;
     int ***a = &q;

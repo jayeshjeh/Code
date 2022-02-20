@@ -8,5 +8,7 @@ int main()
 
     int *q;
 
+    printf("%d", *q);
+
     return 0;
 }

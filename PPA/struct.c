@@ -1,5 +1,4 @@
 #include<stdio.h>
-=======
 
 //structure declaration
 struct Demo

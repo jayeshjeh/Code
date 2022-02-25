@@ -1,13 +1,10 @@
 #include<stdio.h>
+#pragma pack(1) 
 
 struct Demo
 {
     int i;
     char ch;
-    char chh;
-    char hh;
-    char jh;
-    char c;
     int j;
     float f;
 };

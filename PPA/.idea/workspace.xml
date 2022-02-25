@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a948c50-d7da-49c2-8253-34eb0c5bfffc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/struct.c" afterDir="false" />
-    </list>
+    <list default="true" id="0a948c50-d7da-49c2-8253-34eb0c5bfffc" name="Changes" comment="commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,5 +45,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
 </project>

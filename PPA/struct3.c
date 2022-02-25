@@ -3,7 +3,7 @@
 struct Demo
 {
     int i;
-    char ch;
+    char c;
     int j;
     float f;
 };

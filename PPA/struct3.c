@@ -3,6 +3,10 @@
 struct Demo
 {
     int i;
+    char ch;
+    char chh;
+    char hh;
+    char jh;
     char c;
     int j;
     float f;

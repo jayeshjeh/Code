@@ -2,8 +2,8 @@
 
 struct Demo
 {
-    int i;
-    int j;
+    const int i;
+    const int j;
 };
 
 int main()
@@ -12,6 +12,8 @@ int main()
 
     printf("%d\n", obj.i);
     printf("%d\n", obj.j);
+
+    //obj.i++; Not allowed as constant have intitialized
 
     return 0;
 }

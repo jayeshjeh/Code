@@ -4,11 +4,21 @@
 
 int main()
 {
-    int Arr[5];         //Static memort allocation
+    // int Arr[5];         //Static memort allocation
+    int *ptr = NULL;
     int size = 0;
 
     printf("Enter number of elements that you want to allocate: ");
     scanf("%d", &size);
+
+    ptr = (int *)malloc(size * sizeof(int));
+    
+    if (ptr == NULL) {
+        printf("Unable to allocate memory\n");
+    }
+    else {
+        printf("Memory successfully allocated\n");
+    }
 
     return 0;
 }

@@ -8,7 +8,7 @@ int main()
     int size = 0;
 
     printf("Enter number of elements that you want to allocate: ");
-    scanf("%d", %size);
+    scanf("%d", &size);
 
     return 0;
 }

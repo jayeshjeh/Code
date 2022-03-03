@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a948c50-d7da-49c2-8253-34eb0c5bfffc" name="Changes" comment="commit" />
+    <list default="true" id="0a948c50-d7da-49c2-8253-34eb0c5bfffc" name="Changes" comment="commit">
+      <change afterPath="$PROJECT_DIR$/preprocessor.c" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

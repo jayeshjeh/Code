@@ -4,6 +4,9 @@ int main() {
 
     auto int std = 0;
 
+    printf("Enter std: \n");
+    scanf("%d", &std);
+
     if(std == 1){
         printf("Your exam is at 8am\n");
     }

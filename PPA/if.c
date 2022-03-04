@@ -2,7 +2,7 @@
 
 int main()
 {
-    int marks = 0;
+    auto int marks = 0;
 
     printf("Enter of marks\n");
     scanf("%d", &marks);

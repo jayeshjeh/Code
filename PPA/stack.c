@@ -21,7 +21,7 @@ int main(){
     scanf("%d", &iValue2);
 
     iret = addition(iValue1, iValue2);
-    printf("Addiition of two numbers is: %d", iret);
+    printf("Addition of two numbers is: %d", iret);
 
     return 0;
 }

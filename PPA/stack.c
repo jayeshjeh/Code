@@ -1,7 +1,7 @@
 #include<stdio.h>
 
 int addition(int no1, int no2){
-    int ans = 0;
+    auto int ans = 0;
 
     ans = no1 + no2;
 
@@ -21,7 +21,7 @@ int main(){
     scanf("%d", &iValue2);
 
     iret = addition(iValue1, iValue2);
-    printf("Addiition of two numbers is %d", iret);
+    printf("Addiition of two numbers is: %d", iret);
 
     return 0;
 }

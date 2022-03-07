@@ -1,7 +1,7 @@
 #include<stdio.h>
 
-int main(){
-    auto int std = 0;
+void main(){
+    int std = 0;
 
     printf("Enter your standard\n");
     scanf("%d", &std);
@@ -35,7 +35,6 @@ int main(){
             printf("Invalid std\n");
             
     }
-    
 
-    return 0;
+    
 }

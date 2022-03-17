@@ -1,38 +1,61 @@
 #include<iostream>
 using namespace std;
 
-class Arithmetic{
+class Arithematic
+{
     public:
-    int n1;
-    int n2;
+    // Characteristics
+    int iNo1;
+    int iNo2;
 
-    int add(){
-        int ans = 0;
-        ans  = n1 + n2;
-        return ans;
+    // Behaviour
+
+    Arithematic()   // Default Constructor
+    {
+        cout<<"Inside default constructor\n";
+        iNo1 = 0;
+        iNo2 = 0;
     }
 
-    int sub(){
-        int ans = 0;
-        ans  = n1 - n2;
-        return ans;
-
+    Arithematic(int A, int B)   // Parametrised Constructor
+    {
+        cout<<"Inside parametrised constructor\n";
+        iNo1 = A;
+        iNo2 = B;
     }
 
+    ~Arithematic()  // Destructor
+    {
+        cout<<"Inside Destructor\n";
+    }
 
+    int Addition()
+    {
+        int iAns = 0;
+        iAns = iNo1 + iNo2;
+        return iAns;
+    }
+
+    int Substraction()
+    {
+        int iAns = 0;
+        iAns = iNo1 - iNo2;
+        return iAns;
+    }
 };
 
-int main() {
-
-    int v1 = 0, v2 =0, iret =0;
+int main()
+{
+    auto int iValue1 = 0, iValue2 = 0, iRet = 0;
 
     cout<<"Enter first number\n";
-    cin>>v1;
+    cin>>iValue1;
 
     cout<<"Enter second number\n";
-    cin>>v2;
+    cin>>iValue2;
 
-    Arithmetic obj1();
+    Arithematic obj1;
+    Arithematic obj2(iValue1, iValue2);
 
     return 0;
 }

@@ -46,7 +46,7 @@ class Arithematic
 
 int main()
 {
-    auto int iValue1 = 0, iValue2 = 0, iRet = 0;
+    int iValue1 = 0, iValue2 = 0, iRet = 0;
 
     cout<<"Enter first number\n";
     cin>>iValue1;
@@ -56,6 +56,12 @@ int main()
 
     Arithematic obj1;
     Arithematic obj2(iValue1, iValue2);
+
+    iRet = obj2.Addition();
+    cout<<"Addition is : "<<iRet<<"\n";
+
+    iRet = obj2.Substraction();
+    cout<<"Substraction is : "<<iRet<<"\n";
 
     return 0;
 }

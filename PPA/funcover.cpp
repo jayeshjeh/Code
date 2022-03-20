@@ -23,7 +23,16 @@ class Demo{
 };
 
 int main(){
+    Demo obj;
 
+    int ret = obj.add(10,11);
+    cout<<ret<<"\n";
+
+    ret = obj.add(10,11,21);
+    cout<<ret<<"\n";
+
+    ret = obj.add(10,11,21,51);
+    cout<<ret<<"\n";
 
     return 0;
 }

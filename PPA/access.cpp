@@ -20,7 +20,7 @@ class Demo{
     }
 
     private:
-    vote gun(){
+    void gun(){
         cout<<"Inside private gun\n";
     }
 };
@@ -29,5 +29,5 @@ int main(){
     
 
     return 0;
-    
+
 }

@@ -42,6 +42,12 @@ int main(){
 
     Derived dobj;
 
+    cout<<sizeof(Base)<<"\n";
+    cout<<sizeof(Derived)<<"\n";
+
+    dobj.fun();
+    dobj.gun();
+
     return 0;
 
 }

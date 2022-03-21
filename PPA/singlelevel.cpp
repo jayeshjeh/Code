@@ -37,8 +37,11 @@ class Derived : public Base{
 
 };
 
+
 int main(){
 
+    Derived dobj;
 
     return 0;
+
 }

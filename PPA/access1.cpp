@@ -27,7 +27,10 @@ class Hello : public Demo{
 
 int main(){
 
-
+    Demo dobj;
+    dobj.i;
+    dobj.j;
+    dobj.k;
 
     return 0;
 

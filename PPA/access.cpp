@@ -3,6 +3,7 @@
 using namespace std;
 
 class Demo{
+    int i;
     public:
         int x;
 
@@ -26,7 +27,11 @@ class Demo{
 };
 
 int main(){
-    
+
+    Demo obj;
+    cout<<obj.x<<"\n";
+    cout<<obj.y<<"\n";
+    cout<<obj.i<<"\n";
 
     return 0;
 

@@ -24,13 +24,14 @@ class B : public A{
 
 };
 
+
 class C : public B {
     public:
 
     private:
 
     protected:
-    
+
 };
 
 

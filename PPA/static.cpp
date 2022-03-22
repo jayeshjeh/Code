@@ -17,7 +17,11 @@ class Demo{
 
 int main(){
 
+    Demo obj1;
+    Demo obj2;
 
+    cout<<sizeof(obj1)<<"\n";
+    cout<<sizeof(obj2)<<"\n";
 
     return 0;
 }

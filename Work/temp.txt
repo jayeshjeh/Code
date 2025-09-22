@@ -8,22 +8,13 @@ Below is a drop-in query built for the exact line you showed.
 
 ```sql
 fields @timestamp, @message
-| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
-       as userId, requestUri, inputParams, totalTime, status
-| parse inputParams '*countryCode=*&*' as countryCode, _
-| display @timestamp, userId, requestUri, status, totalTime, countryCode
-| sort @timestamp desc
-| limit 50
-
-
-fields @timestamp, @message
-| parse @message '*User ID: * ' as userId
-| parse @message '* "RequestUri: * " ' as requestUri
-| parse @message '* Input Params:* "Total Time Taken: * " "Status: *' as inputParams, totalTime, status
+| parse @message '*User ID: * "RequestUri:' as userId
+| parse @message '* "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' as requestUri, inputParams, totalTime, status
 | parse inputParams '*countryCode=*&*' as countryCode, _
 | display @timestamp, userId, requestUri, status, totalTime, countryCode
 | sort @timestamp desc
 | limit 200
+
 
 ```
 

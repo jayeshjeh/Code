@@ -1,110 +1,151 @@
-Short answer: yes—you can filter by `countryCode` (and many more) without regex. Your current pattern is a bit brittle, so switch to **smaller, stacked `parse` lines** and then **parse inside `inputParams`** for each key.
+To build a **CloudWatch Dashboard** with the following features based on your sample log, we can use a combination of:
 
-Below is a drop-in query built for the exact line you showed.
+* **CloudWatch Logs Insights queries** (for monthly aggregation, URI breakdown, filters)
+* **CloudWatch Dashboard widgets** (for visualization: line/bar graphs, tables)
+* **Filters or search** in the query section (for filtering on `RequestUri` or `User ID`)
 
 ---
 
-## Robust (no-regex) parsing + country filter
+### ✅ Goal Summary
+
+You want a CloudWatch Dashboard with:
+
+1. **Monthly API Request Metrics**
+
+   * Total number of API requests per month
+   * Per-URI breakdown
+
+2. **Filtering + Visualization**
+
+   * Filter by `RequestUri`
+   * View trends over time (line/bar chart)
+
+3. **Search**
+
+   * Full-text search in logs (e.g., by `User ID`, `Params`, etc.)
+
+---
+
+## ✅ Step-by-Step Plan
+
+---
+
+### 🧩 1. Use Log Insights Queries (for Dashboard Widgets)
+
+You will write a **CloudWatch Logs Insights query** that:
+
+* Parses fields (`RequestUri`, `User ID`, etc.)
+* Groups by month
+* Aggregates count
+* Filters by path (optional)
+
+---
+
+#### ✅ Basic Query: Monthly API Hits by URI
 
 ```sql
 fields @timestamp, @message
-| parse @message '*User ID: * "RequestUri:' as userId
-| parse @message '"RequestUri: * "' as requestUri
-| parse @message '* "Total Time Taken: * " "Status: *' as totalTime, status
-| display @timestamp, userId, requestUri, status, totalTime
+| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
+    as userId, requestUri, inputParams, totalTime, status
+| stats count(*) as requestCount 
+    by bin(1d, @timestamp), requestUri
+| sort @timestamp asc
+```
+
+* `bin(1d, @timestamp)` groups requests by **daily** timestamp.
+* You can replace `1d` with `1w` or `1M` for **weekly/monthly** aggregation.
+* You can filter by specific URI like:
+
+  ```sql
+  | filter requestUri = "/data-availability-check"
+  ```
+
+---
+
+#### 🔍 For Dashboard Filtering (Optional)
+
+To enable filtering from the dashboard UI:
+
+* Use a **Logs Insights widget** with a filter on `requestUri`:
+
+  ```sql
+  | filter requestUri like /data-availability/
+  ```
+
+---
+
+### 📊 2. Add Dashboard Widgets
+
+In CloudWatch:
+
+* Go to **Dashboards > Create Dashboard**
+* Add **Line/Bar/Number** widget
+* Choose **Logs Insights**
+* Paste your query
+* Choose the correct log group
+
+#### 📌 Examples:
+
+* **Line Chart**: Request Count over Time (`bin(1M)` or `bin(1d)`)
+* **Table**: Top 10 URIs with most hits
+* **Bar Chart**: URI path vs. count
+* **Search Box**: For userId / Params matching
+
+---
+
+### 🔎 3. Optional: Full Search Query
+
+To enable search across all fields (like a mini search engine):
+
+```sql
+fields @timestamp, userId, requestUri, status, inputParams
+| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
+    as userId, requestUri, inputParams, totalTime, status
+| filter ispresent(userId)
 | sort @timestamp desc
-| limit 200
-
-
-
 ```
 
-**Why this works better than your previous parse:**
-
-* We don’t depend on one giant pattern; each field has its own nearest anchors.
-* Inside `inputParams`, we grab values up to the next `&`, which is stable for query strings—even with URL-encoded characters like `%3A`.
+* This allows free-text search over parsed values.
 
 ---
 
-## Create the monthly metrics you wanted
+## 🛠 Recommended Dashboard Widgets Setup
 
-### A) Total requests per month
+| Widget Type          | Query Purpose          | Notes                                |
+| -------------------- | ---------------------- | ------------------------------------ |
+| Line Chart           | Requests per Day/Month | Group by `bin(1d or 1M)`             |
+| Bar Chart            | Count per `requestUri` | Breakdown per API path               |
+| Table                | Full logs with fields  | Parsed `User ID`, `requestUri`, etc. |
+| Logs Insights Search | Raw filtered logs      | Search by `userId`, `params`, etc.   |
 
-```sql
-fields @timestamp
-| stats count() as totalRequests by bin(30d, @timestamp)
-| sort @timestamp asc
-```
+---
 
-### B) Monthly breakdown by URI + countryCode
+## 📌 Example Monthly Aggregation Query
 
 ```sql
 fields @timestamp, @message
-| parse @message '* "RequestUri: * " '                   as requestUri
-| parse @message '* Input Params:* "Total Time Taken: * " ' as inputParams, totalTime
-| parse inputParams '*countryCode=*&*'                   as countryCode, _
-| stats count() as requests by bin(30d, @timestamp), requestUri, countryCode
-| sort @timestamp asc, requests desc
-```
-
-### C) Error rate & latency (p95) by URI
-
-```sql
-fields @timestamp, @message
-| parse @message '* "RequestUri: * " '                   as requestUri
-| parse @message '* Input Params:* "Total Time Taken: * " ' as inputParams, totalTime
-| parse @message '* "Status: *'                          as status
-| stats 
-    count() as total,
-    sum( status like /^5/ ) as errors,
-    pct( to_number(totalTime), 95 ) as p95Ms
-  by bin(30d, @timestamp), requestUri
-| eval errorRate = errors * 100.0 / total
+| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
+    as userId, requestUri, inputParams, totalTime, status
+| stats count(*) as totalRequests 
+    by bin(1M, @timestamp), requestUri
 | sort @timestamp asc
 ```
 
-> If you prefer avoiding regex entirely, replace `status like /^5/` with:
->
-> ```sql
-> | eval is5xx = substr(status, 0, 1) = '5'
-> | stats count() as total, sum(is5xx) as errors ...
-> ```
+---
+
+## ✅ Final Tips
+
+* Use **`bin(1M, @timestamp)`** for **monthly trend**
+* Use **`stats count(*) by requestUri`** for **API path breakdown**
+* You can use **CloudWatch Metric Filters** + **custom namespace** if you need metrics instead of Logs Insights
+* Use **dynamic filters** to allow dashboard users to choose URIs interactively
 
 ---
 
-## What fields can you turn into “custom metrics”?
+Would you like me to generate JSON for a CloudWatch dashboard with pre-built widgets like:
 
-From your log you can safely build metrics on:
+* Monthly trends
+* URI breakdown
+* Search panel?
 
-* **Volume**: request count (overall, per `requestUri`, per `userId`, per `countryCode`, per status)
-* **Latency**: `avg`, `p90`, `p95` of `totalTime` (overall and per dimension)
-* **Reliability**: 2xx / 4xx / 5xx rates by `requestUri`, `countryCode`, `userId`
-* **Feature usage**: counts per `cropEppoCode`, `diseaseEppoCode`, `mode`
-* **Geotemporal slices**: requests per month by `countryCode`
-* **“Hot endpoints”**: Top N `requestUri` by volume/latency/errors
-
-You can:
-
-* Keep them as **Logs Insights queries** (then add as **Dashboard widgets**), or
-* Emit **CloudWatch custom metrics** using **Metric Filters** (best when you need alarms, anomaly detection, or cross-service charts). For metric filters you’d either:
-
-  * Continue with anchored globs, or
-  * Switch to **JSON logs** so the filter pattern is trivial.
-
----
-
-## Why your earlier output looked “not as expected”
-
-* That single, long `parse` expected exact spaces/quotes everywhere. Small deviations (extra/missing space, an extra field) cause captures to shift or go `null`.
-* Splitting parsing into **small, anchored chunks** is more tolerant and easier to debug. You can comment lines in/out to see which capture fails.
-
----
-
-If you want, I can also give you a **CloudWatch Dashboard JSON** that adds:
-
-1. Line chart: total monthly requests
-2. Stacked bar: monthly by `requestUri`
-3. Table: Top countries by volume/latency
-4. Search widget: ad-hoc `@message` filter
-
-No waiting needed—I’ll drop the JSON ready to paste.
+Or do you want this inside **Terraform/CDK**?

@@ -33,6 +33,16 @@ fields @timestamp, @message
 
 ## 🧪 If That Works, THEN Try This (With type casting & stats):
 
+fields @timestamp, @message
+| parse @message "* User ID: * \"RequestUri: *\" Input Params:* \"Total Time Taken: *\" Status: *" 
+    as userId, requestUri, inputParams, totalTimeStr, statusStr
+| filter ispresent(requestUri) and ispresent(statusStr)
+| stats count(*) as requestCount,
+        avg(to_number(totalTimeStr)) as avgTotalTime,
+        max(to_number(totalTimeStr)) as maxTotalTime
+    by bin(1mo), requestUri
+| sort bin(1mo) asc
+
 ```sql
 fields @timestamp, @message
 | parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * "Status: *' 
@@ -79,3 +89,15 @@ I’m right here to help — just send me:
 * A few log line samples (with UUID/user ID anonymized if needed)
 
 And I’ll give you the **exact final working query**, ready for your dashboard.
+
+
+fields @timestamp, @message
+| parse @message /User ID:\s*(?<userId>[^\s"]+)/
+| parse @message /RequestUri:\s*(?<requestUri>[^\s"]+)/
+| parse @message /Status:\s*(?<status>\d{3})/
+| parse @message /Total Time Taken:\s*(?<totalTime>\d+)/
+| parse @message /[?&]countryCode=(?<countryCode>[^&\s"]+)/
+| display @timestamp, userId, requestUri, status, totalTime, countryCode
+| sort @timestamp desc
+| limit 200
+

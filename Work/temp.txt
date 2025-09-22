@@ -1,151 +1,75 @@
-To build a **CloudWatch Dashboard** with the following features based on your sample log, we can use a combination of:
+Of course. Here are the specific CloudWatch Logs Insights queries you'll need to build your dashboard, along with the recommended visualization for each.
 
-* **CloudWatch Logs Insights queries** (for monthly aggregation, URI breakdown, filters)
-* **CloudWatch Dashboard widgets** (for visualization: line/bar graphs, tables)
-* **Filters or search** in the query section (for filtering on `RequestUri` or `User ID`)
+-----
 
----
+### \#\# 1. Total API Requests Per Month
 
-### ✅ Goal Summary
+This query provides a count of all requests, grouped into 30-day intervals, which is ideal for tracking overall monthly traffic.
 
-You want a CloudWatch Dashboard with:
-
-1. **Monthly API Request Metrics**
-
-   * Total number of API requests per month
-   * Per-URI breakdown
-
-2. **Filtering + Visualization**
-
-   * Filter by `RequestUri`
-   * View trends over time (line/bar chart)
-
-3. **Search**
-
-   * Full-text search in logs (e.g., by `User ID`, `Params`, etc.)
-
----
-
-## ✅ Step-by-Step Plan
-
----
-
-### 🧩 1. Use Log Insights Queries (for Dashboard Widgets)
-
-You will write a **CloudWatch Logs Insights query** that:
-
-* Parses fields (`RequestUri`, `User ID`, etc.)
-* Groups by month
-* Aggregates count
-* Filters by path (optional)
-
----
-
-#### ✅ Basic Query: Monthly API Hits by URI
+**Query:**
 
 ```sql
-fields @timestamp, @message
-| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
-    as userId, requestUri, inputParams, totalTime, status
-| stats count(*) as requestCount 
-    by bin(1d, @timestamp), requestUri
-| sort @timestamp asc
-```
+# Parse the log message to make the RequestUri a usable field
+parse @message '"RequestUri: * "' as RequestUri
 
-* `bin(1d, @timestamp)` groups requests by **daily** timestamp.
-* You can replace `1d` with `1w` or `1M` for **weekly/monthly** aggregation.
-* You can filter by specific URI like:
+# Count all log entries and group them into 30-day buckets
+| stats count(*) as totalRequests by bin(30d)
 
-  ```sql
-  | filter requestUri = "/data-availability-check"
-  ```
-
----
-
-#### 🔍 For Dashboard Filtering (Optional)
-
-To enable filtering from the dashboard UI:
-
-* Use a **Logs Insights widget** with a filter on `requestUri`:
-
-  ```sql
-  | filter requestUri like /data-availability/
-  ```
-
----
-
-### 📊 2. Add Dashboard Widgets
-
-In CloudWatch:
-
-* Go to **Dashboards > Create Dashboard**
-* Add **Line/Bar/Number** widget
-* Choose **Logs Insights**
-* Paste your query
-* Choose the correct log group
-
-#### 📌 Examples:
-
-* **Line Chart**: Request Count over Time (`bin(1M)` or `bin(1d)`)
-* **Table**: Top 10 URIs with most hits
-* **Bar Chart**: URI path vs. count
-* **Search Box**: For userId / Params matching
-
----
-
-### 🔎 3. Optional: Full Search Query
-
-To enable search across all fields (like a mini search engine):
-
-```sql
-fields @timestamp, userId, requestUri, status, inputParams
-| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
-    as userId, requestUri, inputParams, totalTime, status
-| filter ispresent(userId)
+# Sort by the most recent time bucket first
 | sort @timestamp desc
 ```
 
-* This allows free-text search over parsed values.
+  * **Best Visualization:** **Line Chart** to show the trend over time.
 
----
+-----
 
-## 🛠 Recommended Dashboard Widgets Setup
+### \#\# 2. Monthly Requests Broken Down by API Path
 
-| Widget Type          | Query Purpose          | Notes                                |
-| -------------------- | ---------------------- | ------------------------------------ |
-| Line Chart           | Requests per Day/Month | Group by `bin(1d or 1M)`             |
-| Bar Chart            | Count per `requestUri` | Breakdown per API path               |
-| Table                | Full logs with fields  | Parsed `User ID`, `requestUri`, etc. |
-| Logs Insights Search | Raw filtered logs      | Search by `userId`, `params`, etc.   |
+This query shows you which specific API endpoints (`RequestUri`) are being called the most each month.
 
----
-
-## 📌 Example Monthly Aggregation Query
+**Query:**
 
 ```sql
-fields @timestamp, @message
-| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
-    as userId, requestUri, inputParams, totalTime, status
-| stats count(*) as totalRequests 
-    by bin(1M, @timestamp), requestUri
-| sort @timestamp asc
+# Parse the log message to make the RequestUri a usable field
+parse @message '"RequestUri: * "' as RequestUri
+
+# Count requests and group them by both the 30-day bucket and the specific URI
+| stats count(*) as requestCount by bin(30d), RequestUri
+
+# Sort by the most recent time bucket first
+| sort @timestamp desc
 ```
 
----
+  * **Best Visualization:** **Stacked Bar Chart** to compare the volume of different URIs within each month.
 
-## ✅ Final Tips
+-----
 
-* Use **`bin(1M, @timestamp)`** for **monthly trend**
-* Use **`stats count(*) by requestUri`** for **API path breakdown**
-* You can use **CloudWatch Metric Filters** + **custom namespace** if you need metrics instead of Logs Insights
-* Use **dynamic filters** to allow dashboard users to choose URIs interactively
+### \#\# 3. Search and Filter for a Specific API Path
 
----
+This query demonstrates how to search for a specific endpoint. You can use this as a base for widgets that track a single, critical API or for ad-hoc analysis directly in Log Insights.
 
-Would you like me to generate JSON for a CloudWatch dashboard with pre-built widgets like:
+**Query:**
 
-* Monthly trends
-* URI breakdown
-* Search panel?
+```sql
+# Parse the log message to make the RequestUri a usable field
+parse @message '"RequestUri: * "' as RequestUri
 
-Or do you want this inside **Terraform/CDK**?
+# Filter to show results for ONLY the '/data-availability-check' URI
+| filter RequestUri = '/data-availability-check'
+
+# Count the filtered requests in hourly buckets to see detailed trends
+| stats count(*) as requestCount by bin(1h)
+
+# Sort by the most recent time bucket first
+| sort @timestamp desc
+```
+
+  * **Best Visualization:** **Line Chart** or a **Number** widget if you just want the total count over the selected time range.
+
+### **How to Use These Queries**
+
+1.  Navigate to **AWS Console -\> CloudWatch -\> Log Insights**.
+2.  Select your log group and a time range.
+3.  Copy and paste one of the queries into the editor and click **Run query**.
+4.  Select the **Visualization** tab and choose the recommended chart type.
+5.  Click the **Add to dashboard** button to save your widget.

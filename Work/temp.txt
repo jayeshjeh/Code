@@ -15,6 +15,16 @@ fields @timestamp, @message
 | sort @timestamp desc
 | limit 50
 
+
+fields @timestamp, @message
+| parse @message '*User ID: * ' as userId
+| parse @message '* "RequestUri: * " ' as requestUri
+| parse @message '* Input Params:* "Total Time Taken: * " "Status: *' as inputParams, totalTime, status
+| parse inputParams '*countryCode=*&*' as countryCode, _
+| display @timestamp, userId, requestUri, status, totalTime, countryCode
+| sort @timestamp desc
+| limit 200
+
 ```
 
 **Why this works better than your previous parse:**

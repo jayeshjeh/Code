@@ -34,14 +34,16 @@ fields @timestamp, @message
 ## 🧪 If That Works, THEN Try This (With type casting & stats):
 
 fields @timestamp, @message
-| parse @message "* User ID: * \"RequestUri: *\" Input Params:* \"Total Time Taken: *\" Status: *" 
+| parse @message '*User ID: * "RequestUri: *" Input Params:* "Total Time Taken: *" Status: *' 
     as userId, requestUri, inputParams, totalTimeStr, statusStr
-| filter ispresent(requestUri) and ispresent(statusStr)
-| stats count(*) as requestCount,
-        avg(to_number(totalTimeStr)) as avgTotalTime,
-        max(to_number(totalTimeStr)) as maxTotalTime
-    by bin(1mo, @timestamp) as month, requestUri
+| filter ispresent(requestUri) and ispresent(totalTimeStr)
+| stats 
+    count(*) as requestCount,
+    avg(totalTimeStr) as avgTotalTime,
+    max(totalTimeStr) as maxTotalTime
+  by bin(1mo, @timestamp) as month, requestUri
 | sort month asc
+
 
 
 ```sql

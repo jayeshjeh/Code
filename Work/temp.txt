@@ -1,40 +1,105 @@
-Yes, I have understood the requirements. You need ready-to-use CloudWatch Logs Insights queries to create dashboard widgets for:
+Of course. To get that level of detail, you'll want to use a combination of **CloudWatch Metric Filters** for efficient, long-term monitoring and **CloudWatch Logs Insights** for detailed, multi-dimensional analysis.
 
-1.  Total monthly API requests.
-2.  A monthly breakdown of requests for each unique API URI.
-3.  A query to filter for a specific URI path.
-
-Here are the queries without any comments.
+Here is a comprehensive guide with the detailed queries you need.
 
 -----
 
-### **1. Total API Requests Per Month**
+### \#\# Part 1: Create Custom Metrics with Metric Filters 📊
+
+Metric Filters automatically turn your log data into numerical CloudWatch Metrics as it's ingested. This is highly efficient for creating alarms and simple dashboard widgets that track counts, performance, or errors over time.
+
+First, you need a filter pattern to parse and extract the fields from your log events.
+
+**Filter Pattern to Extract All Fields:**
+
+```
+[..., requestId, "User", "ID:", userId, "\"RequestUri:", requestUri, "\"", ..., "Taken:", timeTaken, "\"", "Status:", status, "\""]
+```
+
+**Steps to Create the Metric Filter:**
+
+1.  In the AWS Console, go to **CloudWatch -\> Log groups**.
+2.  Select your log group.
+3.  Click the **Metric filters** tab and then **Create metric filter**.
+4.  **Define pattern:** Paste the filter pattern above into the `Filter pattern` box. You can use the "Test pattern" feature to ensure it correctly extracts fields like `userId`, `requestUri`, `timeTaken`, and `status`.
+5.  **Assign metric:** Click Next and fill in the details:
+      * **Filter name:** `ApiUsageMetrics`
+      * **Metric namespace:** `MyApplication` (or your preferred namespace)
+      * **Metric name:** `RequestCount`
+      * **Metric value:** `1` (This increments the count by 1 for each matching log).
+      * **Unit:** `Count`
+6.  **Add Dimensions (Crucial Step):** Dimensions allow you to slice and dice your metrics. This is key to your requirements.
+      * Click **Add dimension**.
+      * **Dimension name:** `UserID`, **Dimension value:** `$userId`
+      * Click **Add dimension** again.
+      * **Dimension name:** `RequestUri`, **Dimension value:** `$requestUri`
+      * Click **Add dimension** again.
+      * **Dimension name:** `Status`, **Dimension value:** `$status`
+
+Now, you have a custom metric named `RequestCount` that you can view in CloudWatch Metrics and add to dashboards, filtering by `UserID`, `RequestUri`, or `Status`. You could create another metric for performance using `$timeTaken` as the **Metric value**.
+
+-----
+
+### \#\# Part 2: Detailed Log Insights Queries for Analysis 🔍
+
+For deep analysis and answering complex questions, Log Insights is the perfect tool. The queries below will provide the exact breakdowns you've asked for.
+
+First, we will use a single `parse` command to extract all the fields we need for our queries.
+
+**The Base `parse` Command:**
 
 ```sql
-parse @message '"RequestUri: * "' as RequestUri
+parse @message 'User ID: * "RequestUri: * " * "Total Time Taken: * " "Status: *"' as UserID, RequestUri, _, TimeTaken, Status
+```
+
+#### **1. User, API, and Count Per Month**
+
+This is the core query to see which user is calling which API endpoint and how many times per month.
+
+```sql
+parse @message 'User ID: * "RequestUri: * " * "Total Time Taken: * " "Status: *"' as UserID, RequestUri, _, TimeTaken, Status
+| stats count(*) as requestCount by bin(30d), UserID, RequestUri
+| sort UserID, requestCount desc
+```
+
+#### **2. API Path Usage Grouped by User**
+
+This query focuses on the API paths and lists the users who called them, sorted by the highest count. It's useful for seeing the top users of a specific API.
+
+```sql
+parse @message 'User ID: * "RequestUri: * " * "Total Time Taken: * " "Status: *"' as UserID, RequestUri, _, TimeTaken, Status
+| stats count(*) as requestCount by RequestUri, UserID
+| sort RequestUri, requestCount desc
+```
+
+#### **3. Overall Monthly Requests (Trend Graph)**
+
+This query provides the total number of requests per month, which is perfect for a high-level trend line on your dashboard.
+
+```sql
+parse @message 'User ID: * "RequestUri: * " * "Total Time Taken: * " "Status: *"' as UserID, RequestUri, _, TimeTaken, Status
 | stats count(*) as totalRequests by bin(30d)
 | sort @timestamp desc
 ```
 
------
+#### **4. Filtering by a Specific User or URI**
 
-### **2. Monthly Requests Broken Down by API Path**
+The `filter` command is your search feature. You can filter on any field extracted by the `parse` command.
+
+**Filter by User:**
 
 ```sql
-parse @message '"RequestUri: * "' as RequestUri
-| stats count(*) as requestCount by bin(30d), RequestUri
-| sort @timestamp desc
+parse @message 'User ID: * "RequestUri: * " * "Total Time Taken: * " "Status: *"' as UserID, RequestUri, _, TimeTaken, Status
+| filter UserID = 'ggdilpro'
+| stats count(*) by RequestUri
+| sort by @count desc
 ```
 
------
-
-### **3. Search/Filter for a Specific API Path**
-
-*(This example filters for `/data-availability-check` and is displayed hourly for more detail)*
+**Filter by URI Path:**
 
 ```sql
-parse @message '"RequestUri: * "' as RequestUri
+parse @message 'User ID: * "RequestUri: * " * "Total Time Taken: * " "Status: *"' as UserID, RequestUri, _, TimeTaken, Status
 | filter RequestUri = '/data-availability-check'
-| stats count(*) as requestCount by bin(1h)
-| sort @timestamp desc
+| stats count(*) by UserID
+| sort by @count desc
 ```

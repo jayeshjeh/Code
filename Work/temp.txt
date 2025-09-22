@@ -1,0 +1,127 @@
+Short answer: yes—you can filter by `countryCode` (and many more) without regex. Your current pattern is a bit brittle, so switch to **smaller, stacked `parse` lines** and then **parse inside `inputParams`** for each key.
+
+Below is a drop-in query built for the exact line you showed.
+
+---
+
+## Robust (no-regex) parsing + country filter
+
+```sql
+fields @timestamp, @message
+
+/* 1) Parse top-level fields in small chunks (safer) */
+| parse @message '*User ID: * '                          as userId
+| parse @message '* "RequestUri: * " '                   as requestUri
+| parse @message '* Input Params:* "Total Time Taken: * " ' as inputParams, totalTime
+| parse @message '* "Status: *'                          as status
+
+/* 2) Parse selected querystring keys from inputParams */
+| parse inputParams '*countryCode=*&*'                   as countryCode, _
+| parse inputParams '*cropEppoCode=*&*'                  as cropEppoCode, _
+| parse inputParams '*diseaseEppoCode=*&*'               as diseaseEppoCode, _
+| parse inputParams '*mode=*&*'                          as mode, _
+| parse inputParams '*seedingDate=*&*'                   as seedingDate, _
+| parse inputParams '*consultingFromDate=*&*'            as consultingFromDate, _
+| parse inputParams '*consultingToDate=*&*'              as consultingToDate, _
+
+/* 3) (Optional) filter by country or anything else */
+-- | filter countryCode = 'AR'
+-- | filter requestUri = '/short-term-riskV2'
+-- | filter status = '200'
+
+/* 4) Preview rows (table) */
+| display @timestamp, userId, requestUri, status, totalTime,
+          countryCode, cropEppoCode, diseaseEppoCode, mode
+| sort @timestamp desc
+| limit 200
+```
+
+**Why this works better than your previous parse:**
+
+* We don’t depend on one giant pattern; each field has its own nearest anchors.
+* Inside `inputParams`, we grab values up to the next `&`, which is stable for query strings—even with URL-encoded characters like `%3A`.
+
+---
+
+## Create the monthly metrics you wanted
+
+### A) Total requests per month
+
+```sql
+fields @timestamp
+| stats count() as totalRequests by bin(30d, @timestamp)
+| sort @timestamp asc
+```
+
+### B) Monthly breakdown by URI + countryCode
+
+```sql
+fields @timestamp, @message
+| parse @message '* "RequestUri: * " '                   as requestUri
+| parse @message '* Input Params:* "Total Time Taken: * " ' as inputParams, totalTime
+| parse inputParams '*countryCode=*&*'                   as countryCode, _
+| stats count() as requests by bin(30d, @timestamp), requestUri, countryCode
+| sort @timestamp asc, requests desc
+```
+
+### C) Error rate & latency (p95) by URI
+
+```sql
+fields @timestamp, @message
+| parse @message '* "RequestUri: * " '                   as requestUri
+| parse @message '* Input Params:* "Total Time Taken: * " ' as inputParams, totalTime
+| parse @message '* "Status: *'                          as status
+| stats 
+    count() as total,
+    sum( status like /^5/ ) as errors,
+    pct( to_number(totalTime), 95 ) as p95Ms
+  by bin(30d, @timestamp), requestUri
+| eval errorRate = errors * 100.0 / total
+| sort @timestamp asc
+```
+
+> If you prefer avoiding regex entirely, replace `status like /^5/` with:
+>
+> ```sql
+> | eval is5xx = substr(status, 0, 1) = '5'
+> | stats count() as total, sum(is5xx) as errors ...
+> ```
+
+---
+
+## What fields can you turn into “custom metrics”?
+
+From your log you can safely build metrics on:
+
+* **Volume**: request count (overall, per `requestUri`, per `userId`, per `countryCode`, per status)
+* **Latency**: `avg`, `p90`, `p95` of `totalTime` (overall and per dimension)
+* **Reliability**: 2xx / 4xx / 5xx rates by `requestUri`, `countryCode`, `userId`
+* **Feature usage**: counts per `cropEppoCode`, `diseaseEppoCode`, `mode`
+* **Geotemporal slices**: requests per month by `countryCode`
+* **“Hot endpoints”**: Top N `requestUri` by volume/latency/errors
+
+You can:
+
+* Keep them as **Logs Insights queries** (then add as **Dashboard widgets**), or
+* Emit **CloudWatch custom metrics** using **Metric Filters** (best when you need alarms, anomaly detection, or cross-service charts). For metric filters you’d either:
+
+  * Continue with anchored globs, or
+  * Switch to **JSON logs** so the filter pattern is trivial.
+
+---
+
+## Why your earlier output looked “not as expected”
+
+* That single, long `parse` expected exact spaces/quotes everywhere. Small deviations (extra/missing space, an extra field) cause captures to shift or go `null`.
+* Splitting parsing into **small, anchored chunks** is more tolerant and easier to debug. You can comment lines in/out to see which capture fails.
+
+---
+
+If you want, I can also give you a **CloudWatch Dashboard JSON** that adds:
+
+1. Line chart: total monthly requests
+2. Stacked bar: monthly by `requestUri`
+3. Table: Top countries by volume/latency
+4. Search widget: ad-hoc `@message` filter
+
+No waiting needed—I’ll drop the JSON ready to paste.

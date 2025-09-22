@@ -9,11 +9,12 @@ Below is a drop-in query built for the exact line you showed.
 ```sql
 fields @timestamp, @message
 | parse @message '*User ID: * "RequestUri:' as userId
-| parse @message '* "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' as requestUri, inputParams, totalTime, status
-| parse inputParams '*countryCode=*&*' as countryCode, _
-| display @timestamp, userId, requestUri, status, totalTime, countryCode
+| parse @message '"RequestUri: * "' as requestUri
+| parse @message '* "Total Time Taken: * " "Status: *' as totalTime, status
+| display @timestamp, userId, requestUri, status, totalTime
 | sort @timestamp desc
 | limit 200
+
 
 
 ```

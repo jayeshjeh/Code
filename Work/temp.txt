@@ -8,32 +8,13 @@ Below is a drop-in query built for the exact line you showed.
 
 ```sql
 fields @timestamp, @message
-
-/* 1) Parse top-level fields in small chunks (safer) */
-| parse @message '*User ID: * '                          as userId
-| parse @message '* "RequestUri: * " '                   as requestUri
-| parse @message '* Input Params:* "Total Time Taken: * " ' as inputParams, totalTime
-| parse @message '* "Status: *'                          as status
-
-/* 2) Parse selected querystring keys from inputParams */
-| parse inputParams '*countryCode=*&*'                   as countryCode, _
-| parse inputParams '*cropEppoCode=*&*'                  as cropEppoCode, _
-| parse inputParams '*diseaseEppoCode=*&*'               as diseaseEppoCode, _
-| parse inputParams '*mode=*&*'                          as mode, _
-| parse inputParams '*seedingDate=*&*'                   as seedingDate, _
-| parse inputParams '*consultingFromDate=*&*'            as consultingFromDate, _
-| parse inputParams '*consultingToDate=*&*'              as consultingToDate, _
-
-/* 3) (Optional) filter by country or anything else */
--- | filter countryCode = 'AR'
--- | filter requestUri = '/short-term-riskV2'
--- | filter status = '200'
-
-/* 4) Preview rows (table) */
-| display @timestamp, userId, requestUri, status, totalTime,
-          countryCode, cropEppoCode, diseaseEppoCode, mode
+| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * " "Status: *' 
+       as userId, requestUri, inputParams, totalTime, status
+| parse inputParams '*countryCode=*&*' as countryCode, _
+| display @timestamp, userId, requestUri, status, totalTime, countryCode
 | sort @timestamp desc
-| limit 200
+| limit 50
+
 ```
 
 **Why this works better than your previous parse:**

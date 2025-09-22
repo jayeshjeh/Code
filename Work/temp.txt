@@ -40,8 +40,9 @@ fields @timestamp, @message
 | stats count(*) as requestCount,
         avg(to_number(totalTimeStr)) as avgTotalTime,
         max(to_number(totalTimeStr)) as maxTotalTime
-    by bin(1mo), requestUri
-| sort bin(1mo) asc
+    by bin(1mo, @timestamp) as month, requestUri
+| sort month asc
+
 
 ```sql
 fields @timestamp, @message

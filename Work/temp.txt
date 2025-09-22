@@ -1,117 +1,81 @@
-Perfect — thanks for the screenshot!
-
-You’re currently using this working query:
-
-```sql
-fields @timestamp, @message, @logStream, @log
-| sort @timestamp desc
-| limit 1000
-```
-
-This shows **raw log data**, but now you want to build a **graph-based dashboard** for monthly API metrics.
-
-## Let me walk you through how to:
-
-## ✅ Step-by-Step: Dashboard with Monthly API Metrics + Filters
+Thanks for confirming — let’s **troubleshoot and fix the exact query you're using**.
 
 ---
 
-### 🧩 1. **Refined Working Query**
+## ✅ Let’s Debug This Properly, Step by Step
 
-To **parse fields properly** and avoid type mismatches, use this improved query:
+Please copy-paste and run **this minimal query below** which:
+
+* Parses your message safely
+* Does **not assume numeric fields until parsed**
+* Will show parsed output in a table
+
+---
+
+### ✅ Safe Baseline Query (No Aggregation Yet)
 
 ```sql
 fields @timestamp, @message
 | parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * "Status: *' 
-       as userId, requestUri, inputParams, totalTimeStr, statusStr
+  as userId, requestUri, inputParams, totalTimeStr, statusStr
+| display @timestamp, userId, requestUri, inputParams, totalTimeStr, statusStr
+| sort @timestamp desc
+| limit 50
+```
+
+### What this does:
+
+* Parses 5 fields: `userId`, `requestUri`, `inputParams`, `totalTimeStr`, `statusStr`
+* Keeps `totalTimeStr` and `statusStr` as **strings**, so no type mismatch occurs
+* Displays parsed values for debugging
+
+---
+
+## 🧪 If That Works, THEN Try This (With type casting & stats):
+
+```sql
+fields @timestamp, @message
+| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * "Status: *' 
+  as userId, requestUri, inputParams, totalTimeStr, statusStr
 | parse totalTimeStr as totalTime:number
 | parse statusStr as status:number
-| stats count(*) as requestCount 
-       by bin(1M, @timestamp), requestUri
+| stats count(*) as requestCount by bin(1M, @timestamp), requestUri
 | sort @timestamp asc
 ```
 
 ---
 
-### 🧪 Optional: Add Filters
+## 🧯 Still Getting Error? Here's What I Need to Help You Fully:
 
-* **By URI**
+Please tell me:
 
-```sql
-| filter requestUri like /short-term-risk/
-```
-
-* **By User ID**
-
-```sql
-| filter userId = 'ggdilprd'
-```
+1. **Exact error message you’re seeing** (e.g., `Type mismatch: expected string but got number`)
+2. One or two **real log lines** (fully copied raw `@message`) — you can mask sensitive parts
+3. Do all log messages **follow the same format** as the one in the screenshots?
 
 ---
 
-### 📊 2. **Create Dashboard**
+## Bonus: Regex-Free Simpler Parser (Fallback)
 
-1. Go to **CloudWatch → Dashboards**
-2. Click **Create dashboard**
-3. Name it something like `API-Metrics-Dashboard`
-4. Add widget → **Line or Bar graph**
-5. Choose **Logs Insights**
-6. Pick your Log Group
-7. Paste the **query above**
-8. Set refresh interval (e.g., every 5 minutes)
-
----
-
-### 🎯 Widget Suggestions
-
-| Widget Type    | Query                                      | Notes                              |
-| -------------- | ------------------------------------------ | ---------------------------------- |
-| **Line Chart** | Monthly requests over time by `requestUri` | Use `bin(1M, @timestamp)`          |
-| **Bar Chart**  | Top request URIs                           | Use `stats count(*) by requestUri` |
-| **Table**      | Parsed details (userId, URI, status, time) | Show recent logs with limit        |
-| **Search**     | Add full search query to match any field   | Use `@message like /pattern/`      |
-
----
-
-### 🔍 3. **Full Search Query (Optional for Table View)**
-
-To get recent full logs with parsed values:
+If `parse` is error-prone due to double quotes or inconsistent spacing, try this:
 
 ```sql
-fields @timestamp, userId, requestUri, inputParams, totalTimeStr, statusStr
-| parse @message '*User ID: * "RequestUri: * " Input Params:* "Total Time Taken: * "Status: *' 
-       as userId, requestUri, inputParams, totalTimeStr, statusStr
+fields @timestamp, @message
+| parse @message "User ID: * \"RequestUri: * \" Input Params:* \"Total Time Taken: * \"Status: *" 
+  as userId, requestUri, inputParams, totalTimeStr, statusStr
+| display @timestamp, userId, requestUri, statusStr
 | sort @timestamp desc
-| limit 100
+| limit 50
 ```
 
----
-
-### ⚠️ TypeError / TypeMismatch Fix Tips
-
-* Always parse numbers from strings:
-
-  ```sql
-  | parse statusStr as status:number
-  ```
-
-* Don’t do math or grouping on unconverted fields (`statusStr`, `totalTimeStr`)
+This handles literal double-quotes (`\"`) better if present in log structure.
 
 ---
 
-### ✅ Final Tip
+I’m right here to help — just send me:
 
-Once the widgets are in your dashboard, you can:
+* What you ran
+* The exact error (copy-paste it)
+* A few log line samples (with UUID/user ID anonymized if needed)
 
-* **Download JSON** for version control
-* **Add filters** to interactively change `requestUri`/`userId`
-* **Clone** for other environments (prod/dev)
-
----
-
-Do you want me to:
-
-* Create a sample **CloudWatch Dashboard JSON** you can import?
-* Or help you create these widgets one-by-one with visual steps?
-
-Let me know.
+And I’ll give you the **exact final working query**, ready for your dashboard.
